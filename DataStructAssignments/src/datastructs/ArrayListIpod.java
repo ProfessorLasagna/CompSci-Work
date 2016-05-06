@@ -14,7 +14,7 @@ public class ArrayListIpod {
 	
 	public static void main(String[] args) {
 		
-		songs.add("dfgdf");	artists.add("cbhgch");
+		songs.add("stuff");	artists.add("cbhgch");
 		songs.add("dfg");	artists.add("ghghg");
 		songs.add("gfgggg");	artists.add("ghghgh");
 		songs.add("gggg");	artists.add("hghgh");
