@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class FilesVideos {
 
-	private static Formatter z;
+	private static Formatter z;	
+	private static Scanner x;
 	
 	public static void main(String[] args){	
 		
@@ -25,7 +26,7 @@ public class FilesVideos {
 		
 		do{
 			
-			System.out.format("What would you like to do?"
+			System.out.format("%nWhat would you like to do?"
 					+ "%n1. Add a record"
 					+ "%n2. Exit%n");
 			
@@ -53,6 +54,10 @@ public class FilesVideos {
 			
 		closefile();
 				
+		System.out.format("%n %nCurrent records: %n");
+			
+		reader();
+		
 		in.close();
 		
 	}
@@ -98,13 +103,39 @@ public class FilesVideos {
 
 	public static void addrecords(String un, String deux, String trois){
 		
-		z.format("%n%s %s %s", un, deux, trois);
+		z.format("%s %s %s%n", un, deux, trois);
 		
 	}
 
 	public static void closefile(){
 		
 		z.close();
+		
+	}
+	
+	public static void reader(){	
+	
+			try {
+				
+				x = new Scanner(new File("H:\\User_Records.txt"));
+			
+			} catch (FileNotFoundException e) {
+			
+			System.out.format("File not found.");
+			
+			}		
+		
+		while(x.hasNext()){
+			
+			String un = x.next();
+			String deux = x.next();
+			String trois = x.next();
+			
+			System.out.format("%s %s %s%n", un, deux, trois);
+						
+		}
+		
+		x.close();
 		
 	}
 	
