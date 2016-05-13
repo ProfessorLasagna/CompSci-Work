@@ -21,6 +21,8 @@ import java.io.*;
 
 public class BankAccounts extends EasyApp {
 
+	private static final long serialVersionUID = 1L;
+
 	public static void main(String[] args) {
 
 		new BankAccounts();
@@ -29,6 +31,10 @@ public class BankAccounts extends EasyApp {
 
 	Button bWrite = addButton("Write Record", 30, 30, 100, 50, this);
 	Button bRead = addButton("Read Record", 130, 30, 100, 50, this);
+	Button bReadall = addButton("Show all Records", 230, 30, 100, 50, this);
+	Button bAddmoney = addButton("Deposit", 30, 120, 100, 50, this);
+	Button bRemovemoney = addButton("Withdrawal", 130, 120, 100, 50, this);
+
 
 	public void actions(Object source, String command) {
 
@@ -38,6 +44,18 @@ public class BankAccounts extends EasyApp {
 		
 		if (source == bRead) {
 			readRecord();
+		}
+		
+		if(source == bReadall){
+			showAllRecords();						
+		}
+		
+		if(source == bAddmoney){
+			addMoney();					
+		}
+		
+		if(source == bRemovemoney){
+			removeMoney();
 		}
 
 	}
@@ -71,7 +89,7 @@ public class BankAccounts extends EasyApp {
 		
 	}
 
-	public void readRecord() {
+	public void readRecord() {	
 		
 		try {
 			
@@ -85,13 +103,101 @@ public class BankAccounts extends EasyApp {
 			file.seek(40 * pos + 30);
 			double money = file.readDouble();
 
-			output("Record #" + pos + " = " + name + " | " + pin + " | " + money);
+			output("Record #" + pos + " = " + name + " | " + pin + " | $" + money);
 
 			file.close();
+		
 		} catch (IOException ex) {
 			
 			output(ex.toString());
 		
+		}
+		
+	}
+	
+	public void showAllRecords(){
+		
+		try {
+			
+			RandomAccessFile file = new RandomAccessFile("bank.dat", "r");
+
+			long length = (file.length()) / 39;
+			
+			for(long pos1 = 0; pos1 < length; pos1++){
+				
+				file.seek(40 * pos1);
+				String name = file.readUTF();
+				file.seek(40 * pos1 + 25);
+				int pin = file.readInt();
+				file.seek(40 * pos1 + 30);
+				double money = file.readDouble();
+				
+				if(pin != 0){
+					
+					output("Record #" + pos1 + " = " + name + " | $" + money);
+
+				}
+				
+			}
+			
+			file.close();
+			
+		} catch (IOException ex) {
+			
+			output(ex.toString());
+		
+		}
+		
+	}
+	
+	public void addMoney(){
+		
+		try {
+			
+			RandomAccessFile file = new RandomAccessFile("bank.dat", "rw");
+			long pos = inputLong("Type the record number for the account deposit:");
+			
+			file.seek(40 * pos + 30);
+			double currentmoney = file.readDouble();
+			double money = inputDouble("Type the money to be added:");
+			
+			currentmoney = currentmoney + money;
+			
+			file.seek(40 * pos + 30);
+			file.writeDouble(currentmoney);
+		
+			file.close();
+			
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+			
+		}
+						
+	}
+
+	public void removeMoney(){
+		
+		try {
+			
+			RandomAccessFile file = new RandomAccessFile("bank.dat", "rw");
+			long pos = inputLong("Type the record number for the account withdrawal:");
+			
+			file.seek(40 * pos + 30);
+			double currentmoney = file.readDouble();
+			double money = inputDouble("Type the money to be removed:");
+			
+			currentmoney = currentmoney - money;
+			
+			file.seek(40 * pos + 30);
+			file.writeDouble(currentmoney);
+		
+			file.close();
+			
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+			
 		}
 		
 	}
