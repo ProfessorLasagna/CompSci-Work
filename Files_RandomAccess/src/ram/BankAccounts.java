@@ -34,8 +34,11 @@ public class BankAccounts extends EasyApp {
 	Button bReadall = addButton("Show all Records", 230, 30, 100, 50, this);
 	Button bAddmoney = addButton("Deposit", 30, 120, 100, 50, this);
 	Button bRemovemoney = addButton("Withdrawal", 130, 120, 100, 50, this);
-
-
+	Button bMonthlyfee = addButton("Apply Monthly Fee", 230, 120, 100, 50, this);
+	Button bMonthlyInterest = addButton("Apply Interest", 30, 220, 100, 50, this);
+	Button bMonthlyUpdate = addButton("Monthly Update", 130, 220, 100, 50, this);
+	Button bExit = addButton("Exit", 230, 220, 100, 50, this);
+	
 	public void actions(Object source, String command) {
 
 		if (source == bWrite) {
@@ -56,6 +59,15 @@ public class BankAccounts extends EasyApp {
 		
 		if(source == bRemovemoney){
 			removeMoney();
+		}
+		
+		if(source == bMonthlyfee){
+			monthlyFee();
+		}
+		
+		if(source == bExit){
+			output("Goodbye!");
+			System.exit(0);
 		}
 
 	}
@@ -144,8 +156,6 @@ public class BankAccounts extends EasyApp {
 			
 		} catch (IOException ex) {
 			
-			output(ex.toString());
-		
 		}
 		
 	}
@@ -199,6 +209,43 @@ public class BankAccounts extends EasyApp {
 			e.printStackTrace();
 			
 		}
+		
+	}
+	
+	public void monthlyFee(){
+
+		try {
+			
+			RandomAccessFile file = new RandomAccessFile("bank.dat", "rw");
+			
+			for(long pos = 0; pos  < 1000; pos++){	
+			
+				file.seek(40 * pos + 30);
+				double currentmoney = file.readDouble();
+				file.seek(40 * pos);
+				String name = file.readUTF();
+				file.seek(40 * pos + 25);
+				int pin = file.readInt();
+				
+				if(pin != 0)
+					currentmoney = currentmoney - 50;
+				
+				if(currentmoney < 0 && pin != 0)
+					output(name+" has gone into the negative! Current balance: $"+currentmoney+" Account number: " +pos);
+				
+				file.seek(40 * pos + 30);
+				file.writeDouble(currentmoney);
+			
+			}
+						
+			file.close();
+		
+		} catch (IOException ex) {
+			
+			output("Monthly fee Applied!");
+			
+		}	
+		
 		
 	}
 	
