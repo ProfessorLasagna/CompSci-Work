@@ -35,7 +35,12 @@ public class LockersDB extends EasyApp {
 		} else if (source == bShowNames) {
 			int firstlocker = inputInt("Type the first locker in the range:");
 			int lastlocker = inputInt("Type the last locker in the range:");
-			showNames(firstlocker, lastlocker);
+			String teacher = inputString("Type the homeroom teacher of the lockers you would like to view:"
+					+ " \n (Use \"*\" to show all lockers.)");
+			String firstletter = inputString("Type a letter to view all lockers assigned to students that have \n"
+					+ "names starting with that letter: \n"
+					+ "((Use \"*\" to show all lockers.)");
+			showNames(firstlocker, lastlocker, teacher, firstletter);
 		
 		}else if(source == bGenNames){
 			generateNames();
@@ -109,23 +114,27 @@ public class LockersDB extends EasyApp {
 	
 	}
 
-	public void showNames(int firstlocker, int lastlocker) // Show non-blank names and lockers
+	public void showNames(int firstlocker, int lastlocker, String teacher, String firstletter) // Show non-blank names and lockers
 	{
 		
 		try {
 		
 			RandomAccessFile data = new RandomAccessFile("lockers.dat", "rw");
 			
-			for (int row = firstlocker; row <= lastlocker; row = row + 1) {
-				data.seek(row * 75);
-				String name = data.readUTF();
-
-				if (!name.equals("")) {
-					System.out.println(row + "\t" + name);
-				}
-				
-			}
+			if(teacher.equals("*") && firstletter.equals("*")){
 			
+				for (int row = firstlocker; row <= lastlocker; row = row + 1) {
+					data.seek(row * 75);
+					String name = data.readUTF();
+	
+					if (!name.equals("")) {
+						System.out.println(row + "\t" + name);
+					}
+					
+				}
+			
+			}
+				
 			data.close();
 		
 		} catch (IOException e) {
