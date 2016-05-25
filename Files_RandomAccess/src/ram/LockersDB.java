@@ -30,7 +30,8 @@ public class LockersDB extends EasyApp {
 		
 			String name = input("Type the name of the student");
 			int locker = inputInt("Type the locker number:");
-			assignLocker(locker, name);
+			String homeroom = inputString("Type the students homeroom teacher:");
+			assignLocker(locker, name, homeroom);
 		
 		} else if (source == bShowNames) {
 			int firstlocker = inputInt("Type the first locker in the range:");
@@ -39,7 +40,7 @@ public class LockersDB extends EasyApp {
 					+ " \n (Use \"*\" to show all lockers.)");
 			String firstletter = inputString("Type a letter to view all lockers assigned to students that have \n"
 					+ "names starting with that letter: \n"
-					+ "((Use \"*\" to show all lockers.)");
+					+ "(Use \"*\" to show all lockers.)");
 			showNames(firstlocker, lastlocker, teacher, firstletter);
 		
 		}else if(source == bGenNames){
@@ -75,7 +76,7 @@ public class LockersDB extends EasyApp {
 		
 	}
 
-	public void assignLocker(int locker, String name) // Put student name into
+	public void assignLocker(int locker, String name, String homeroom) // Put student name into
 														// file
 	{
 		
@@ -99,6 +100,8 @@ public class LockersDB extends EasyApp {
 			
 				data.seek(locker * 75);
 				data.writeUTF(name);
+				data.seek(locker * 75 + 32);
+				data.writeUTF(homeroom);
 			
 			}else {
 				
@@ -126,14 +129,46 @@ public class LockersDB extends EasyApp {
 				for (int row = firstlocker; row <= lastlocker; row = row + 1) {
 					data.seek(row * 75);
 					String name = data.readUTF();
-	
+					data.seek(row * 75 + 32);
+					String homeroom = data.readUTF();
+					
 					if (!name.equals("")) {
-						System.out.println(row + "\t" + name);
+						System.out.println(row + "\t" + name + "\t" + homeroom);
 					}
 					
 				}
-			
+				
 			}
+			
+			for(int row = firstlocker; row <= lastlocker; row++){
+				
+				data.seek(row * 75 + 32);
+				String homeroom = data.readUTF();
+				
+				if(teacher.equals(homeroom)){
+					
+					data.seek(row * 75);
+					String name = data.readUTF();
+							
+					System.out.println(row + "\t" + name + "\t" + homeroom);
+					
+				}
+				
+			for(int row = firstlocker; row <= lastlocker; row++){
+					
+				data.seek(row * 75 + 32);
+				String homeroom = data.readUTF();
+					
+				if(teacher.equals(homeroom)){
+						
+					data.seek(row * 75);
+					String name = data.readUTF();
+								
+					System.out.println(row + "\t" + name + "\t" + homeroom);
+						
+				}
+				
+			}		
 				
 			data.close();
 		
@@ -157,6 +192,9 @@ public class LockersDB extends EasyApp {
 				
 				data.seek(row * 75);
 				data.writeUTF(name);
+				data.seek(row * 75 + 32);
+				data.writeUTF("Mr. Meow");
+
 				
 				a++;
 				
