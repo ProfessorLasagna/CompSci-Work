@@ -14,10 +14,14 @@ public class LockersDB extends EasyApp {
 	Button bClear = addButton("Clear All", 50, 50, 100, 50, this);
 	Button bAssign = addButton("Assign", 150, 50, 100, 50, this);
 	Button bShowNames = addButton("Show Names", 250, 50, 100, 50, this);
-	Button bGenNames = addButton("Generate Names", 50, 150, 100 ,50, this);
-
+	Button bByLetter = addButton("Show By Letter", 75, 100, 125, 50, this);
+	Button bByTeacher = addButton("Show By Teacher", 200, 100, 125, 50, this);
+	Button bFindEmpty = addButton("Find Empty Lockers", 75, 150, 125, 50, this);
+	Button bAssignTeacher = addButton("Assign Teacher", 200, 150, 125, 50, this);
+	Button bGenNames = addButton("Generate Names", 50, 250, 100 ,50, this);
+	
 	public LockersDB() {
-		setSize(500, 150);
+		setSize(500, 250);
 		setTitle("Lockers Database");
 	}
 
@@ -30,21 +34,35 @@ public class LockersDB extends EasyApp {
 		
 			String name = input("Type the name of the student");
 			int locker = inputInt("Type the locker number:");
-			String homeroom = inputString("Type the students homeroom teacher:");
-			assignLocker(locker, name, homeroom);
+			assignLocker(locker, name);
 		
 		} else if (source == bShowNames) {
 			int firstlocker = inputInt("Type the first locker in the range:");
 			int lastlocker = inputInt("Type the last locker in the range:");
-			String teacher = inputString("Type the homeroom teacher of the lockers you would like to view:"
-					+ " \n (Use \"*\" to show all lockers.)");
-			String firstletter = inputString("Type a letter to view all lockers assigned to students that have \n"
-					+ "names starting with that letter: \n"
-					+ "(Use \"*\" to show all lockers.)");
-			showNames(firstlocker, lastlocker, teacher, firstletter);
+			showNames(firstlocker, lastlocker, "*", "*");
 		
-		}else if(source == bGenNames){
+		} else if(source == bGenNames){
 			generateNames();
+		
+		} else if(source == bAssignTeacher){
+			int firstlocker = inputInt("Type the first locker in the range to be assigned:");
+			int lastlocker = inputInt("Type the last locker in the range to be assigned:");
+			String teacher = inputString("Type the homeroom teacher that will be assigned to these lockers:");
+			assignHomeroom(firstlocker, lastlocker, teacher);
+			
+		} else if(source == bFindEmpty){
+			int firstlocker = inputInt("Type the first locker in the range:");
+			int lastlocker = inputInt("Type the last locker in the range:");
+			findLockers(firstlocker, lastlocker);
+		
+		}else if(source == bByTeacher){
+			String teacher = inputString("Type the homeroom teacher of the lockers you would like to view:");
+			showNames(0, 3000, teacher, "*");
+		
+		} else if(source == bByLetter){
+			String firstletter = inputString("Type a letter to view all lockers assigned to students that have \n"
+					+ "names starting with that letter: \n");
+			showNames(0, 3000, "*", firstletter);
 		}
 	
 	}
@@ -76,7 +94,7 @@ public class LockersDB extends EasyApp {
 		
 	}
 
-	public void assignLocker(int locker, String name, String homeroom) // Put student name into
+	public void assignLocker(int locker, String name) // Put student name into
 														// file
 	{
 		
@@ -100,8 +118,6 @@ public class LockersDB extends EasyApp {
 			
 				data.seek(locker * 75);
 				data.writeUTF(name);
-				data.seek(locker * 75 + 32);
-				data.writeUTF(homeroom);
 			
 			}else {
 				
@@ -115,6 +131,60 @@ public class LockersDB extends EasyApp {
 			System.out.println("IOException occured in clearList()");
 		}
 	
+	}
+	
+	public void assignHomeroom(int firstlocker, int lastlocker, String teacher){
+		
+		try {
+			
+			RandomAccessFile data = new RandomAccessFile("lockers.dat", "rw");
+
+			if (teacher.length() > 30) {
+				teacher = teacher.substring(0, 30);
+			}
+
+			for (int row = firstlocker; row <= lastlocker; row = row + 1) {
+				
+				data.seek(row * 75 + 32);
+				data.writeUTF(teacher);
+				
+			}
+
+			data.close();
+		
+		} catch (IOException e) {
+			System.out.println("IOException occured in clearList()");
+		}
+		
+	}
+	
+	public void findLockers(int firstlocker, int lastlocker){
+		
+		try{
+			
+			RandomAccessFile data = new RandomAccessFile("lockers.dat", "r");
+			
+			System.out.println("The following lockers do not have a student assigned to them:");
+			
+			for(int row = firstlocker; row <= lastlocker; row++){
+				
+				data.seek(row * 75);
+				String name = data.readUTF();
+							
+				if(name.equals("")){
+					
+					System.out.println(row);
+					
+				}
+				
+			}
+		
+			data.close();
+			
+		}catch (IOException e) {
+			System.out.println("IOException occured in clearList()");
+		}
+		
 	}
 
 	public void showNames(int firstlocker, int lastlocker, String teacher, String firstletter) // Show non-blank names and lockers
@@ -140,6 +210,8 @@ public class LockersDB extends EasyApp {
 				
 			}
 			
+			if(teacher.equals("*") && !firstletter.equals("*")){
+			
 			for(int row = firstlocker; row <= lastlocker; row++){
 				
 				data.seek(row * 75 + 32);
@@ -153,6 +225,8 @@ public class LockersDB extends EasyApp {
 					System.out.println(row + "\t" + name + "\t" + homeroom);
 					
 				}
+				
+			}
 				
 			for(int row = firstlocker; row <= lastlocker; row++){
 					
@@ -195,7 +269,6 @@ public class LockersDB extends EasyApp {
 				data.seek(row * 75 + 32);
 				data.writeUTF("Mr. Meow");
 
-				
 				a++;
 				
 			}
