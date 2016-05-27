@@ -57,12 +57,12 @@ public class LockersDB extends EasyApp {
 		
 		}else if(source == bByTeacher){
 			String teacher = inputString("Type the homeroom teacher of the lockers you would like to view:");
-			showNames(0, 3000, teacher, "*");
+			showNames(0, 2999, teacher, "*");
 		
 		} else if(source == bByLetter){
 			String firstletter = inputString("Type a letter to view all lockers assigned to students that have \n"
 					+ "names starting with that letter: \n");
-			showNames(0, 3000, "*", firstletter);
+			showNames(0, 2999, "*", firstletter);
 		}
 	
 	}
@@ -210,39 +210,48 @@ public class LockersDB extends EasyApp {
 				
 			}
 			
-			if(teacher.equals("*") && !firstletter.equals("*")){
+			if(!teacher.equals("*") && firstletter.equals("*")){
 			
-			for(int row = firstlocker; row <= lastlocker; row++){
-				
-				data.seek(row * 75 + 32);
-				String homeroom = data.readUTF();
-				
-				if(teacher.equals(homeroom)){
+				for(int row = firstlocker; row <= lastlocker; row++){
 					
-					data.seek(row * 75);
-					String name = data.readUTF();
-							
-					System.out.println(row + "\t" + name + "\t" + homeroom);
+					data.seek(row * 75 + 32);
+					String homeroom = data.readUTF();
 					
-				}
-				
-			}
-				
-			for(int row = firstlocker; row <= lastlocker; row++){
-					
-				data.seek(row * 75 + 32);
-				String homeroom = data.readUTF();
-					
-				if(teacher.equals(homeroom)){
+					if(teacher.equals(homeroom)){
 						
-					data.seek(row * 75);
-					String name = data.readUTF();
+						data.seek(row * 75);
+						String name = data.readUTF();
 								
-					System.out.println(row + "\t" + name + "\t" + homeroom);
+						System.out.println(row + "\t" + name + "\t" + homeroom);
 						
+					}
+					
 				}
 				
 			}		
+			
+			if(teacher.equals("*") && !firstletter.equals("*")){
+				
+				for(int row = firstlocker; row <= lastlocker; row++){
+					
+					data.seek(row * 75 + 32);
+					String homeroom = data.readUTF();
+					data.seek(row * 75);
+					String letter = data.readLine();
+					
+					
+					if(letter.charAt(0) == firstletter.charAt(0)){
+					
+						data.seek(row * 75);
+						String name = data.readUTF();
+
+						System.out.println(row + "\t" + name + "\t" + homeroom);
+						
+					}
+					
+				}
+					
+			}	
 				
 			data.close();
 		
@@ -279,7 +288,6 @@ public class LockersDB extends EasyApp {
 			System.out.println("IOException occured in clearList()");
 		}
 	
-		
 	}
 	
 }
