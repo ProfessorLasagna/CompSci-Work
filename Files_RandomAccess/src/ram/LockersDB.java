@@ -2,6 +2,7 @@ package ram;
 
 import java.awt.*; // contains GUI controls
 import java.io.*; // contains data-file commands – for RandomAccessFile
+import java.awt.event.*;
 
 public class LockersDB extends EasyApp {
 	
@@ -19,6 +20,7 @@ public class LockersDB extends EasyApp {
 	Button bFindEmpty = addButton("Find Empty Lockers", 75, 150, 125, 50, this);
 	Button bAssignTeacher = addButton("Assign Teacher", 200, 150, 125, 50, this);
 	Button bGenNames = addButton("Generate Names", 50, 250, 100 ,50, this);
+	Choice cPrint = addChoice("- Output -|Console|Text File",375,50,100,30,this);   
 	
 	public LockersDB() {
 		setSize(500, 250);
@@ -234,18 +236,26 @@ public class LockersDB extends EasyApp {
 				
 				for(int row = firstlocker; row <= lastlocker; row++){
 					
-					data.seek(row * 75 + 32);
-					String homeroom = data.readUTF();
-					data.seek(row * 75);
-					String letter = data.readLine();
 					
-					
-					if(letter.charAt(0) == firstletter.charAt(0)){
-					
+					try {
+			
+						data.seek(row * 75 + 32);
+						String homeroom = data.readUTF();
 						data.seek(row * 75);
-						String name = data.readUTF();
-
-						System.out.println(row + "\t" + name + "\t" + homeroom);
+						String letter = data.readUTF();
+						String str =letter.substring(0, 1);					
+						
+						
+						if(str.equals(firstletter)){
+							
+							data.seek(row * 75);
+							String name = data.readUTF();
+	
+							System.out.println(row + "\t" + name + "\t" + homeroom);
+								
+						}
+						
+					} catch (Exception StringIndexOutOfBoundsException) {
 						
 					}
 					
@@ -258,6 +268,99 @@ public class LockersDB extends EasyApp {
 		} catch (IOException e) {
 			System.out.println("IOException occured in clearList()");
 		}
+		
+	}
+	
+	public void printNames(int firstlocker, int lastlocker, String teacher, String firstletter){
+		
+		try{
+		
+			PrintWriter file = new PrintWriter(new FileWriter("H:\\LockerDB.txt"));
+		
+			try {
+				
+				RandomAccessFile data = new RandomAccessFile("lockers.dat", "rw");
+				
+				if(teacher.equals("*") && firstletter.equals("*")){
+				
+					for (int row = firstlocker; row <= lastlocker; row = row + 1) {
+						data.seek(row * 75);
+						String name = data.readUTF();
+						data.seek(row * 75 + 32);
+						String homeroom = data.readUTF();
+						
+						if (!name.equals("")) {
+							file.println(row + "\t" + name + "\t" + homeroom);
+						}
+						
+					}
+					
+				}
+				
+				if(!teacher.equals("*") && firstletter.equals("*")){
+				
+					for(int row = firstlocker; row <= lastlocker; row++){
+						
+						data.seek(row * 75 + 32);
+						String homeroom = data.readUTF();
+						
+						if(teacher.equals(homeroom)){
+							
+							data.seek(row * 75);
+							String name = data.readUTF();
+									
+							file.println(row + "\t" + name + "\t" + homeroom);
+							
+						}
+						
+					}
+					
+				}		
+				
+				if(teacher.equals("*") && !firstletter.equals("*")){
+					
+					for(int row = firstlocker; row <= lastlocker; row++){
+						
+						
+						try {
+				
+							data.seek(row * 75 + 32);
+							String homeroom = data.readUTF();
+							data.seek(row * 75);
+							String letter = data.readUTF();
+							String str =letter.substring(0, 1);					
+							
+							
+							if(str.equals(firstletter)){
+								
+								data.seek(row * 75);
+								String name = data.readUTF();
+		
+								file.println(row + "\t" + name + "\t" + homeroom);
+									
+							}
+							
+						} catch (Exception StringIndexOutOfBoundsException) {
+							
+						}
+						
+					}
+						
+				}	
+					
+				data.close();
+			
+			} catch (IOException e) {
+				System.out.println("IOException occured in clearList()");
+			}
+		
+			file.close();
+			
+		}catch(IOException e1){
+			
+		}
+		
+		
 		
 	}
 
