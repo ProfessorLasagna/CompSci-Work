@@ -13,7 +13,7 @@ public class DungeonCrawler extends EasyApp{
 		new DungeonCrawler();
 	}
 	
-	Menu mGame = addMenu("Game|New Game|Load Game|Save Game");
+	Menu mGame = addMenu("Game|New Game|Load Game|Save Game|Quit");
 	
 	public DungeonCrawler(){
 	
@@ -53,6 +53,10 @@ public class DungeonCrawler extends EasyApp{
 		try {
 			
 			RandomAccessFile saves = new RandomAccessFile("saves.dat", "rw");
+			
+			if (name.length() > 30) { //Truncates the name if necessary
+				name = name.substring(0, 30);
+			}
 			
 			for(int a = 0; a < 100; a++){
 				
