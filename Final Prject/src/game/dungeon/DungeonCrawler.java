@@ -58,19 +58,31 @@ public class DungeonCrawler extends EasyApp{
 				name = name.substring(0, 30);
 			}
 			
-			for(int a = 0; a < 100; a++){
+			for(int row = 0; row < 100; row++){
 				
-				saves.seek(a);
+				saves.seek(row * 150);
+				String namecheck = saves.readUTF();
 				
-			}
+				if(namecheck.equals("")){
+				
+					saves.seek(row * 150);
+					saves.writeUTF(name);
+					output("Game Created!");
+					break;
+				
+				}
+				
+			}	
 			
-			
+			saves.close();
 			
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 			
 		}
+		
+		
 		
 	}
 	
