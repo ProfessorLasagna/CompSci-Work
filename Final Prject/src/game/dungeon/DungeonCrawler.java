@@ -1,7 +1,7 @@
 package game.dungeon;
 
 import java.awt.*; // contains GUI controls
-import java.io.*; // contains data-file commands – for RandomAccessFile
+import java.io.*; // contains data-file commands â€“ for RandomAccessFile
 import javax.imageio.ImageIO;
 
 public class DungeonCrawler extends EasyApp{
@@ -21,6 +21,8 @@ public class DungeonCrawler extends EasyApp{
 	Button bNorth = addButton("North", 125, 300, 100, 50, this);
 	Button bWest = addButton("West", 25, 350, 100, 50, this);
 	Button bSouth = addButton("South", 125, 400, 100, 50, this);
+	Button bEast = addButton("East", 225, 350, 100, 50, this);
+	Button bMap = addButton("Map", 25, 50, 100, 50, this);
 	
 	public DungeonCrawler(){
 	
@@ -29,8 +31,7 @@ public class DungeonCrawler extends EasyApp{
 	
 	}
 	
-	public void paint(Graphics g)
-    {	
+	public void paint(Graphics g) {	
 		try {
 			
 			backgroundimg = ImageIO.read(new File("background.jpg"));
@@ -51,6 +52,18 @@ public class DungeonCrawler extends EasyApp{
 			String newgame = inputString("Please enter the name of your save:");
 			createGame(newgame);
 			
+		}
+		
+		if(source == bNorth){
+			goNorth();
+		}else if(source == bSouth){
+			goSouth();
+		}else if(source == bWest){
+			goWest();
+		}else if(source == bEast){
+			goEast();
+		}else if(source == bMap){
+			viewMap();
 		}
 		
 	}
@@ -119,6 +132,35 @@ public class DungeonCrawler extends EasyApp{
 		}
 		
 	}
+	
+	public void goNorth(){
+	
+	
+		
+	}
+	
+	public void goSouth(){
+		
+		
+		
+	}
+	
+	public void goWest(){
+		
+		
+		
+	}
 
+	public void goEast(){
+		
+		
+		
+	}
+	
+	public void viewMap(){
+		
+		
+		
+	}
 	
 }
