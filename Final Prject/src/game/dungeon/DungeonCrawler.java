@@ -11,6 +11,7 @@ public class DungeonCrawler extends EasyApp{
 	public int currentsave = 0;
 	public int location = 0;
 	public int gold = 0;
+	public int level = 1;
 	public Boolean activegame = false;
 	
 	public static void main(String[] args) {
@@ -18,11 +19,13 @@ public class DungeonCrawler extends EasyApp{
 	}
 	
 	Menu mGame = addMenu("Game|New Game|Load Game|Save Game|Quit");
-	Button bNorth = addButton("North", 125, 300, 100, 50, this);
-	Button bWest = addButton("West", 25, 350, 100, 50, this);
-	Button bSouth = addButton("South", 125, 400, 100, 50, this);
-	Button bEast = addButton("East", 225, 350, 100, 50, this);
-	Button bMap = addButton("Map", 25, 50, 100, 50, this);
+	Button bNorth = addButton("North", 125, 300, 75, 50, this);
+	Button bWest = addButton("West", 50, 350, 75, 50, this);
+	Button bSouth = addButton("South", 125, 400, 75, 50, this);
+	Button bEast = addButton("East", 200, 350, 75, 50, this);
+	Button bMap = addButton("Map", 675, 75, 50, 50, this);
+	Button bHelp = addButton("?", 25, 75, 25, 25, this);
+	Button bAttack = addButton("Attack", 125, 350, 75, 50, this);
 	
 	public DungeonCrawler(){
 	
@@ -54,18 +57,58 @@ public class DungeonCrawler extends EasyApp{
 			
 		}
 		
-		if(source == bNorth){
-			goNorth();
-		}else if(source == bSouth){
-			goSouth();
-		}else if(source == bWest){
-			goWest();
-		}else if(source == bEast){
-			goEast();
-		}else if(source == bMap){
-			viewMap();
-		}
+		if(activegame){
 		
+			if(source == bNorth){
+				
+				if(location == 0 || location == 1 || location == 4 || location == 5 || location == 6)
+				goNorth();
+				
+				else
+				output("You cannot go anymore north!");
+					
+			}else if(source == bSouth){
+				
+				if(location == 1 || location == 6 || location == 3 || location == 7 || location == 8)
+				goSouth();
+				
+				else
+				output("You cannot go anymore south!");
+				
+			}else if(source == bWest){
+				
+				if(location == 2 || location == 3 || location == 5 || location == 6)
+				goWest();
+				
+				else
+				output("You cannot go anymore west!");
+				
+			}else if(source == bEast){
+				
+				if(location == 1 || location == 2 || location == 3 || location == 7)
+				goEast();
+				
+				else
+				output("You cannot go anymore east!");
+				
+			}else if(source == bMap){
+				viewMap();
+			
+			}else if(source == bHelp){
+				
+				output("Welcome to the dungeon! Clicking \"Map\" will show your current location in the dungeon."
+						+ "\nNavigate the dungeon using the directional buttons on the bottom right of your screen."
+						+ "\nYour highscore is tracked by how much gold you find in the dungeon. The game ends when you die"
+						+ "\nor defeat the big bad goblin in the biggest room at the end of the dungeon."
+						+ "\nLevel up by defeating monsters to do more damage."
+						+ "\n\"Run\" will allow you to flee from your attacker but you will not gain any experience."
+						+ "\nGood Luck!");
+				
+			}
+			
+		}else
+		output("Please begin a game first.");
+						
 	}
 	
 	public void createGame(String name){
@@ -93,6 +136,7 @@ public class DungeonCrawler extends EasyApp{
 					output("Game Created!");
 					location = 0;
 					gold = 0;
+					level = 1;
 					currentsave = row;
 					activegame = true;
 					break;
@@ -135,31 +179,102 @@ public class DungeonCrawler extends EasyApp{
 	
 	public void goNorth(){
 	
+	if(location == 0)
+		location = 1;
 	
+	else if (location == 1)
+		location = 7;
+	
+	else if(location == 4)
+		location = 3;
+	
+	else if(location == 5)
+		location = 6;
+	
+	else if(location == 6)
+		location = 8;
 		
 	}
 	
 	public void goSouth(){
 		
+		if(location == 1)
+			location = 0;
 		
+		else if(location == 7)
+			location = 1;
+		
+		else if(location == 3)
+			location = 4;
+		
+		else if(location == 6)
+			location = 5;
+		
+		else if(location == 8)
+			location = 6;
 		
 	}
 	
-	public void goWest(){
+	public void goEast(){
 		
+		if(location == 1)
+			location = 2;
 		
+		else if(location == 2)
+			location = 3;
+		
+		else if(location == 3)
+			location = 5;
+		
+		else if(location == 7)
+			location = 6;
 		
 	}
 
-	public void goEast(){
+	public void goWest(){
 		
+		if(location == 2)
+			location = 1;
 		
+		else if(location == 3)
+			location = 2;
+		
+		else if(location == 5)
+			location = 3;
+		
+		else if(location == 6)
+			location = 7;
 		
 	}
 	
 	public void viewMap(){
 		
+		if(location == 0)
+			runProgram("Notepad.exe \"maps\\map1.txt\"");
 		
+		else if(location == 1)
+			runProgram("Notepad.exe \"maps\\map2.txt\"");
+		
+		else if(location == 2)
+			runProgram("Notepad.exe \"maps\\map3.txt\"");
+		
+		else if(location == 3)
+			runProgram("Notepad.exe \"maps\\map4.txt\"");
+		
+		else if(location == 4)
+			runProgram("Notepad.exe \"maps\\map5.txt\"");
+		
+		else if(location == 5)
+			runProgram("Notepad.exe \"maps\\map6.txt\"");
+		
+		else if(location == 6)
+			runProgram("Notepad.exe \"maps\\map7.txt\"");
+		
+		else if(location == 7)
+			runProgram("Notepad.exe \"maps\\map8.txt\"");
+		
+		else if(location == 8)
+			runProgram("Notepad.exe \"maps\\map9.txt\"");
 		
 	}
 	
