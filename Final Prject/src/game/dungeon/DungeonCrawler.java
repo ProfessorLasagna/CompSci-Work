@@ -1,13 +1,14 @@
 package game.dungeon;
 
 import java.awt.*; // contains GUI controls
+import java.awt.image.ImageObserver;
 import java.io.*; // contains data-file commands – for RandomAccessFile
 import javax.imageio.ImageIO;
 
 public class DungeonCrawler extends EasyApp{
 
 	private static final long serialVersionUID = 1L;
-	Image backgroundimg;
+	Image backgroundimg, monstergoblin;
 	public int currentsave = 0;
 	public int location = 0;
 	public int gold = 0;
@@ -38,6 +39,7 @@ public class DungeonCrawler extends EasyApp{
 		try {
 			
 			backgroundimg = ImageIO.read(new File("background.jpg"));
+			monstergoblin = ImageIO.read(new File("monstergoblinresize.png"));
 		
 		} catch (IOException e) {
 		
@@ -46,14 +48,43 @@ public class DungeonCrawler extends EasyApp{
 		
         g.drawImage(backgroundimg, 0, 0, null);
 
+
     }
+	
+	public void update(){
+		
+		try {
+			
+			monstergoblin = ImageIO.read(new File("monstergoblinresize.png"));
+		
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+		
+        Graphics.drawImage(monstergoblin, 0, 0, null);
+
+
+    }
+	
+	}
 	
 	public void actions(Object source, String command) {
 		
 		if(command.equals("Game|New Game")){
 			
 			String newgame = inputString("Please enter the name of your save:");
+			update(null);
 			createGame(newgame);
+			
+		}else if(command.equals("Game|Save Game")){
+			
+			saveGame();
+			
+		}else if(command.equals("Game|Load Game")){
+			
+			String name = inputString("Please enter the name of your save:");
+			loadGame(name);
 			
 		}
 		
@@ -165,7 +196,54 @@ public class DungeonCrawler extends EasyApp{
 			saves.writeInt(gold);
 			saves.seek(currentsave * 150 + 36);
 			saves.writeInt(location);
+			saves.seek(currentsave * 150 + 40);
+			saves.writeInt(level);
 			output("Game Saved!");
+			
+			saves.close();
+			
+		}catch (IOException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
+	public void loadGame(String name){
+		
+		try{
+			
+			RandomAccessFile saves = new RandomAccessFile("saves.dat", "rw");
+			
+			saves.seek(101*150);
+			saves.writeUTF("");
+			
+			if (name.length() > 30) { //Truncates the name if necessary
+				name = name.substring(0, 30);
+			}
+			
+			for(int row = 0; row < 100; row++){
+				
+				saves.seek(row * 150);
+				String namecheck = saves.readUTF();
+				
+				if(namecheck.equals(name)){
+				
+					saves.seek(row * 150 + 32);
+					gold = saves.readInt();
+					saves.seek(row * 150 + 36);
+					location = saves.readInt();
+					saves.seek(currentsave * 150 + 40);
+					level = saves.readInt();
+					currentsave = row;
+					activegame = true;
+					output("Game Loaded!");
+					break;
+				
+				}
+
+			}
 			
 			saves.close();
 			
