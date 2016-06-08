@@ -13,6 +13,7 @@ public class DungeonCrawler extends EasyApp{
 	public int location = 0;
 	public int gold = 0;
 	public int level = 1;
+	public int meow = 0;
 	public Boolean activegame = false;
 	
 	public static void main(String[] args) {
@@ -31,7 +32,8 @@ public class DungeonCrawler extends EasyApp{
 	public DungeonCrawler(){
 	
 		setSize(750, 500);
-		setTitle("Lockers Database");
+		setResizable(false);
+		setTitle("The Dungeon Game");
 	
 	}
 	
@@ -47,39 +49,33 @@ public class DungeonCrawler extends EasyApp{
 		}
 		
         g.drawImage(backgroundimg, 0, 0, null);
+        
+        if(meow == 1){
+        	g.drawImage(monstergoblin, 0, 0, null);
+        }
 
-
+      
+        
     }
 	
-	public void update(){
-		
-		try {
-			
-			monstergoblin = ImageIO.read(new File("monstergoblinresize.png"));
-		
-		} catch (IOException e) {
-		
-			e.printStackTrace();
-		}
-		
-        Graphics.drawImage(monstergoblin, 0, 0, null);
-
-
-    }
-	
-	}
 	
 	public void actions(Object source, String command) {
 		
 		if(command.equals("Game|New Game")){
 			
 			String newgame = inputString("Please enter the name of your save:");
-			update(null);
+			meow = 1;
+			revalidate();
+      repaint();
+			
 			createGame(newgame);
 			
 		}else if(command.equals("Game|Save Game")){
 			
 			saveGame();
+			meow = 0;
+			revalidate();
+		      repaint();
 			
 		}else if(command.equals("Game|Load Game")){
 			
@@ -258,7 +254,7 @@ public class DungeonCrawler extends EasyApp{
 	public void goNorth(){
 	
 	if(location == 0)
-		location = 1;
+		location = 1;	
 	
 	else if (location == 1)
 		location = 7;
@@ -272,6 +268,7 @@ public class DungeonCrawler extends EasyApp{
 	else if(location == 6)
 		location = 8;
 		
+		attackMonster();
 	}
 	
 	public void goSouth(){
@@ -291,6 +288,7 @@ public class DungeonCrawler extends EasyApp{
 		else if(location == 8)
 			location = 6;
 		
+		attackMonster();		
 	}
 	
 	public void goEast(){
@@ -307,6 +305,7 @@ public class DungeonCrawler extends EasyApp{
 		else if(location == 7)
 			location = 6;
 		
+		attackMonster();
 	}
 
 	public void goWest(){
@@ -323,6 +322,7 @@ public class DungeonCrawler extends EasyApp{
 		else if(location == 6)
 			location = 7;
 		
+		attackMonster();
 	}
 	
 	public void viewMap(){
@@ -353,6 +353,12 @@ public class DungeonCrawler extends EasyApp{
 		
 		else if(location == 8)
 			runProgram("Notepad.exe \"maps\\map9.txt\"");
+		
+	}
+	
+	public void attackMonster(){
+		
+		
 		
 	}
 	
