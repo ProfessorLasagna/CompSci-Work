@@ -6,6 +6,9 @@ import util.converter.EasyApp;
 public class ColourConverter extends EasyApp{//
 	
 	private static final long serialVersionUID = 1L;
+	
+	public int red = 255, green = 255, blue = 255;
+	public String rs = "255", gs = "255", bs = "255";
 
 	public static void main(String[] args){
 		new ColourConverter();	
@@ -14,14 +17,24 @@ public class ColourConverter extends EasyApp{//
 	TextField sCode = addTextField("", 30, 100, 150, 25, this);
 	Label lCode = addLabel("Hex Colour Code:", 29, 60, 150, 60, this);
 	Label lTitle = addLabel("Hexadecimal Colour Code converter", 20, 20, 500, 60, this);
+	Label lDec = addLabel("Decimal:  Red: "+rs+"  Green:   "+gs+"  Blue:   "+bs, 28,128,500,50,this);
+	Label lBin = addLabel("Binary:  Red: 1111 1111 "+"  Green: 1111 1111"+"  Blue: 1111 1111", 28,160,500,50,this);
 	Button bCalc = addButton("Submit", 190, 99, 50, 25, this);
 	Button bDisplay = addButton("List Codes", 500, 95, 75, 25, this);
+	Frame fCol = new Frame();
 
 	public ColourConverter(){
 		
 		lTitle.setFont(new Font("Arial",1,18));
 		
 	}
+	
+	public void paint(Graphics g) {
+	    g.drawRect (275, 88, 150, 50);
+	    g.setColor(new Color(red,green,blue));
+	    g.fillRect(275, 88, 150, 50);
+	  }
+	
 	
 	 public void actions(Object source,String command){
 		 
@@ -48,7 +61,7 @@ public class ColourConverter extends EasyApp{//
 	 
 	 public void displayList(){
 		 		 
-		 String red = "Red: #FF0000", blue = "Blue: #0000FF", green = "Green: #008000", 
+		 String red = "Red: #FF0000", blue = "Blue: #0000FF", green = "Green: #00FF00", 
 				yellow = "Yellow: #FFFF00";
 		 
 		 String colourList = red+"\n"+blue+"\n"+green+"\n"+yellow;
@@ -60,20 +73,27 @@ public class ColourConverter extends EasyApp{//
 	 public void convertCode(String hexcode){
 		 
 		 String r1, r2 , g1, g2, b1, b2;
-		 int red = 0, green = 0, blue = 0;
 		 
 		 r1 = hexcode.substring(1, 2);
 		 r2 = hexcode.substring(2, 3);
 		 g1 = hexcode.substring(3, 4);
-		 g2 = hexcode.substring(5, 6);
-		 b1 = hexcode.substring(6, 7);
-		 b2 = hexcode.substring(7);
+		 g2 = hexcode.substring(4, 5);
+		 b1 = hexcode.substring(5, 6);
+		 b2 = hexcode.substring(6, 7);
 		 
 		red = hextodec(r1, r2);
 		green = hextodec(g1, g2);
 		blue = hextodec(b1, b2);
 		
+		dectobin(red);
 		
+		rs = Integer.toString(red);
+		gs = Integer.toString(green);
+		bs = Integer.toString(blue);
+		
+		lDec.setText("Decimal:  Red: "+rs+"  Green:   "+gs+"  Blue:   "+bs);
+		
+		repaint();
 		
 	 }
 		 
@@ -272,6 +292,74 @@ public class ColourConverter extends EasyApp{//
 		 total = ones + sixteens;
 		 
 		 return(total);
+		
+	 }
+	 
+	 public void dectobin(int deccode){
+			 
+		int ones = 0, twos = 0, fours = 0, eights = 0, sixteens = 0, thirtytwos = 0, sixtyfours = 0, onetwentyeights = 0;
+		
+		int testnum = 0;
+		
+		if(deccode - 128 >= 0){
+			
+			onetwentyeights = 1;
+			deccode = deccode - 128;
+			
+		}
+		
+		if(deccode - 64 >= 0){
+			
+			sixtyfours = 1;
+			deccode = deccode - 64;
+			
+		}
+		
+		if(deccode - 32 >= 0){
+			
+			thirtytwos = 1;
+			deccode = deccode - 32;
+			
+		}
+		
+		if(deccode - 16 >= 0){
+			
+			sixteens = 1;
+			deccode = deccode - 16;
+			
+		}
+		
+		if(deccode - 8 >= 0){
+			
+			eights = 1;
+			deccode = deccode - 8;
+			
+		}
+		
+		if(deccode - 4 >= 0){
+			
+			fours = 1;
+			deccode = deccode - 4;
+			
+		}
+		
+		if(deccode - 2 >= 0){
+			
+			twos = 1;
+			deccode = deccode - 2;
+			
+		}
+		
+		if(deccode - 1 >= 0){
+			
+			ones = 1;
+			deccode = deccode - 1;
+			
+		}
+		
+		int num = (ones + (twos * 10) + (fours * 100) + (eights * 1000) + (sixteens * 10000) + (thirtytwos * 100000) + (sixtyfours * 1000000) + (onetwentyeights * 10000000));
+		 		
+		System.out.println(num);
 		
 	 }
 	 
