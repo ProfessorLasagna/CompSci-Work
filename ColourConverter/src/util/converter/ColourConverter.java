@@ -9,6 +9,7 @@ public class ColourConverter extends EasyApp{//
 	
 	public int red = 255, green = 255, blue = 255;
 	public String rs = "255", gs = "255", bs = "255";
+	public String rb = "11111111", gb = "11111111", bb = "11111111";
 
 	public static void main(String[] args){
 		new ColourConverter();	
@@ -85,13 +86,16 @@ public class ColourConverter extends EasyApp{//
 		green = hextodec(g1, g2);
 		blue = hextodec(b1, b2);
 		
-		dectobin(red);
-		
 		rs = Integer.toString(red);
 		gs = Integer.toString(green);
 		bs = Integer.toString(blue);
 		
+		rb = Integer.toString(dectobin(red));
+		gb = Integer.toString(dectobin(green));
+		bb = Integer.toString(dectobin(blue));
+		
 		lDec.setText("Decimal:  Red: "+rs+"  Green:   "+gs+"  Blue:   "+bs);
+		lBin.setText("Binary:  Red: "+rb+"  Green: "+gb+"  Blue: "+bb);
 		
 		repaint();
 		
@@ -295,11 +299,10 @@ public class ColourConverter extends EasyApp{//
 		
 	 }
 	 
-	 public void dectobin(int deccode){
+	 public int dectobin(int deccode){
 			 
-		int ones = 0, twos = 0, fours = 0, eights = 0, sixteens = 0, thirtytwos = 0, sixtyfours = 0, onetwentyeights = 0;
-		
-		int testnum = 0;
+		int ones = 0, twos = 0, fours = 0, eights = 0, sixteens = 0, thirtytwos = 0, 
+			sixtyfours = 0, onetwentyeights = 0;
 		
 		if(deccode - 128 >= 0){
 			
@@ -359,9 +362,8 @@ public class ColourConverter extends EasyApp{//
 		
 		int num = (ones + (twos * 10) + (fours * 100) + (eights * 1000) + (sixteens * 10000) + (thirtytwos * 100000) + (sixtyfours * 1000000) + (onetwentyeights * 10000000));
 		 		
-		System.out.println(num);
+		return(num);
 		
 	 }
 	 
 }
-
