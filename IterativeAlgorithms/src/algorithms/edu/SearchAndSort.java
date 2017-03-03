@@ -23,7 +23,7 @@ public class SearchAndSort {
 	}
 
 	private static int binarySearch(String a[], String srchVal){
-		
+		//
 		int lv = 0;
 		int hv = a.length-1;
 		
