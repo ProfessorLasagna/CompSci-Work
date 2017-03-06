@@ -1,0 +1,52 @@
+package algorithms.edu;
+
+import java.util.Scanner;
+
+public class BinarySearchTwo {
+	
+	public static void main(String args[]){
+		
+		Scanner in = new Scanner(System.in);
+		
+		int list[] = {12, 13, 32, 35, 46, 68, 71, 73, 88, 94, 99, 100};
+		
+		System.out.println("Please enter a number:");
+		int input = in.nextInt();
+		
+		binarySearch(list,input);
+		
+		in.close();
+		
+	}
+
+	private static int binarySearch(int a[], int srchVal){
+		
+		int lv = 0;
+		int hv = a.length-1;
+		
+		while(hv >= lv){
+			
+			int mid = (lv + hv) / 2;
+			
+			if(srchVal == a[mid]){
+				
+				System.out.println("Yes");
+				return(mid);
+				
+			} else if(srchVal > a[mid]){
+				
+				lv = mid+1;
+				
+			} else{
+				
+				hv = mid - 1;
+				
+			}
+			
+		}
+		
+		return(-1);
+	
+	}
+	
+}
