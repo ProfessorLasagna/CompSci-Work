@@ -56,7 +56,18 @@ public class ColourConverter extends EasyApp{//
 	 public String getHex(){
 		 
 		 String text = sCode.getText();
-		 return(text);
+		 
+		 if(text.length()> 7 || text.length() < 7){
+			 
+			 output("This is not a valid colour code.");
+			 
+		 }else{
+		 
+			 return(text);
+		 
+		 }
+		 
+		 return("#FFFFFF");
 		 
 	 }
 	 
