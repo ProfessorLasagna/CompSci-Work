@@ -1,0 +1,51 @@
+package algorithms.edu;
+
+public class InsertionSort {
+	
+	public static void main(String args[]){
+		
+		int a[] = {12, 64, 2, 46, 26, 70, 55};
+		
+		selectionSort(a);		
+		
+	}
+	
+	public static void selectionSort(int a[]){
+		
+		int in = 0, cur = 0, max = a.length - 1, one, two, test1 = 0, test2 = a.length;
+			
+		while(cur < max){
+			
+			if(a[in] < a[cur]){
+				
+				test1 = cur + 1;
+				
+				while(test1 <= test2){
+					
+					if(a[in] > a[test1]){
+						
+					in = test1;	
+						
+					}
+					
+					test1++;
+					
+				}
+				
+				one = a[in];
+				two = a[cur];
+				a[cur] = one;
+				a[in] = two;
+				System.out.format("%d%n", a[cur]);
+				cur++;				
+				in = cur + 1;
+				
+			}
+			
+			in++;
+			
+		}
+	
+	}
+
+}
