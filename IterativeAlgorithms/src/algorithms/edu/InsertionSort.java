@@ -4,7 +4,7 @@ public class InsertionSort {
 	
 	public static void main(String args[]){
 		
-		int a[] = {12, 64, 2, 46, 26, 70, 55};
+		int a[] = {9, 16, 19, 25, 99, 1, 2, 1205, 123, 5643, 9876, 129, 3};
 		
 		selectionSort(a);		
 		
@@ -12,39 +12,38 @@ public class InsertionSort {
 	
 	public static void selectionSort(int a[]){
 		
-		int in = 1, cur = 0, b = 0, max = a.length-1, one, two;
-		
-		while(b < a.length + 1){
+		int in = 0, cur = 0, max = a.length, one, two, test1 = 0, test2 = a.length;
 			
-			in = 0;
-			
-			while(in < max){
+		while(cur < max){
+							
+			test1 = cur + 1;
 				
-				
-				
-				if(a[in] < a[cur]){
+			while(test1 < test2){
 					
-					one = a[cur];
-					two = a[in];
-					
-					a[in] = one;
-					a[cur] = two;
-					break;
-					
+				if(a[in] > a[test1]){
+						
+				in = test1;	
+																
 				}
-				
-				if(in == cur)
-				in++;
-				
-				in++;
+					
+				test1++;
+					
 			}
 				
+			one = a[in];
+			two = a[cur];
+			a[cur] = one;
+			a[in] = two;
 			cur++;
-			b++;
-			
+			in = cur;
+							
 		}
 		
-		System.out.format("%d %d %d %d %d %d %d",a[0], a[1], a[2], a[3], a[4], a[5], a[6]);
+		for(int k = 0; k < a.length; k++){
+			
+			System.out.format("%d ", a[k]);
+			
+		}
 		
 	}
 
