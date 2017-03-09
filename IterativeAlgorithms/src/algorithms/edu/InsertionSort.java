@@ -4,7 +4,7 @@ public class InsertionSort {
 	
 	public static void main(String args[]){
 		
-		int a[] = {9, 16, 19, 25, 99, 1, 2, 1205, 123, 5643, 9876, 129, 3};
+		int a[] = {10,0,1,10000,100,1000};
 		
 		selectionSort(a);		
 		
@@ -47,4 +47,10 @@ public class InsertionSort {
 		
 	}
 
+	
+	//Program takes the array of integers(can be changed) and sends it to the selection sort method
+	//where it will find the lowest number in the data collection and place it in the first index. 
+	//It will then move on to the second index where it will continue in order until all numbers
+	//in the array are sorted from least to greatest.
+	
 }
