@@ -1,0 +1,98 @@
+package algorithms.edu;
+
+import java.util.Scanner;
+
+public class Sorting {
+	
+	public static void main(String args[]){
+		
+		String myFriends[] = {"MacKay", "Schofield", "Smith", "Hughes", "Ronaghan", "Copping", "Telford", "Kasprick",
+				"Jones", "Weimer", "Quinlan", "Chmillar", "Dickson", "Weigum", "Hill"};
+		
+		String input;
+		
+		Scanner in = new Scanner(System.in);
+		
+		System.out.format("Unsorted: ");
+		
+		for(int k = 0; k < myFriends.length; k++){
+			
+			System.out.format("%s%n ", myFriends[k]);
+			
+		}
+		
+		System.out.println("Please enter a last name:");
+		input = in.nextLine();
+		
+		in.close();
+		
+	}
+
+	
+	private static int binarySearch(String a[], String srchVal){
+		//
+		int lv = 0;
+		int hv = a.length-1;
+		
+		while(hv >= lv){
+			
+			int mid = (lv + hv) / 2;
+			
+			if(srchVal.compareTo(a[mid]) == 0){
+				
+				return(mid);
+				
+			} else if(srchVal.compareTo(a[mid]) > 0){
+				
+				lv = mid+1;
+				
+			} else{
+				
+				hv = mid - 1;
+				
+			}
+			
+		}
+		
+		return(-1);
+	
+	}
+	
+	public static void selectionSort(int a[]){
+		
+		int in = 0, cur = 0, max = a.length, one, two, test1 = 0, test2 = a.length;
+			
+		while(cur < max){
+							
+			test1 = cur + 1;
+				
+			while(test1 < test2){
+					
+				if(a[in] > a[test1]){
+						
+				in = test1;	
+																
+				}
+					
+				test1++;
+					
+			}
+				
+			one = a[in];
+			two = a[cur];
+			a[cur] = one;
+			a[in] = two;
+			cur++;
+			in = cur;
+							
+		}
+		
+		for(int k = 0; k < a.length; k++){
+			
+			System.out.format("%d ", a[k]);
+			
+		}
+		
+	}
+	
+}
