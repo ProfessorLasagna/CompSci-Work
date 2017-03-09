@@ -13,6 +13,8 @@ public class SearchAndSort {
 		
 		String input;
 		
+		
+		
 		System.out.format("Please enter a letter to evaluate:");
 		input = in.nextLine(); 
 		
