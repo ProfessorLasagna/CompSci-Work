@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 public class Sorting {
 	
+	 /*
+	 For my sort method I chose to use selection sort. This decision was based off the fact that is easy to implement for this 
+	 very specific function and because I wrote the method myself so I have a much deeper understanding of how it works compared
+	 to if I had just ripped it from a website.
+	 */
+	
 	public static void main(String args[]){
 		
 		String myFriends[] = {"MacKay", "Schofield", "Smith", "Hughes", "Ronaghan", "Copping", "Telford", "Kasprick",
@@ -44,9 +50,8 @@ public class Sorting {
 		
 	}
 
-	
 	private static int binarySearch(String a[], String srchVal){
-		//
+		
 		int lv = 0;
 		int hv = a.length-1;
 		
