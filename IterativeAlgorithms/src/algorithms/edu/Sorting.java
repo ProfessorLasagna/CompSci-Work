@@ -34,7 +34,7 @@ public class Sorting {
 		for(int k = 0; k < myFriends.length; k++){
 
 			System.out.format("%s%n", myFriends[k]);
-
+//
 		}
 
 		System.out.format("%nPlease enter a last name:");
