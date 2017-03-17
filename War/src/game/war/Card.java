@@ -8,7 +8,7 @@ public class Card {
 	public static Queue<String> hand1 = new LinkedList<String>();
 	public static Queue<String> hand2 = new LinkedList<String>();
 	
-	public static void main(String args[]){
+	public void deck(){
 	
 		int[] deck = new int[52];
 		
@@ -24,22 +24,7 @@ public class Card {
 			
 			hand2.offer(Integer.toString(deck[a]));
 			
-		}
-		
-		for(int a = 0; a < 26; a++){
-			
-			System.out.println(hand1.remove());
-			
-		}
-		
-		System.out.format("%n%n%n");
-		
-		for(int a = 0; a < 26; a++){
-			
-			System.out.println(hand2.remove());
-			
-		}
-		
+		}		
 		
 	}
 	
