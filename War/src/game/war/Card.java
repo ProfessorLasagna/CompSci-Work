@@ -10,9 +10,36 @@ public class Card {
 	
 	public static void main(String args[]){
 	
-		int deck[] = new int[52];
+		int[] deck = new int[52];
 		
 		deck = shuffle(deck);
+		
+		for(int a = 0; a < 26; a++){
+			
+			hand1.offer(Integer.toString(deck[a]));
+			
+		}
+		
+		for(int a = 26; a < 52; a++){
+			
+			hand2.offer(Integer.toString(deck[a]));
+			
+		}
+		
+		for(int a = 0; a < 26; a++){
+			
+			System.out.println(hand1.remove());
+			
+		}
+		
+		System.out.format("%n%n%n");
+		
+		for(int a = 0; a < 26; a++){
+			
+			System.out.println(hand2.remove());
+			
+		}
+		
 		
 	}
 	
