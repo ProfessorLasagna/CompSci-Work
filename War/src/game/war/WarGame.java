@@ -10,7 +10,7 @@ public class WarGame extends Card{
 	
 	public static void main(String args[]){
 		
-		String check1 = "0", check2 = "0";
+		String test = "n";
 		
 		Card card = new Card();
 		card.deck();
@@ -24,25 +24,43 @@ public class WarGame extends Card{
 				+ "%nIf we both draw the same card that means we have to go to war!"
 				+ "%nIn the case of war we will each place another card on the playing field."
 				+ "%nThe player with the highest card that was just placed down gets all of the cards on the table!"
-				+ "This will continue until one of us has no cards left."
+				+ "%nThis will continue until one of us has no cards left."
 				+ "%n%nPlease press the 'Enter' key to begin!");
 		
-		do{	
-			
-			 
+		do{	 
+			test = in.nextLine();
+			if(test == "h"){
+				
+				
+				System.out.format("%n%n%n%n%n%n");
+				
+				for(int a = 0; a < hand1.size(); a++){
+					
+					System.out.format("%s%n", hand1.remove());
+					
+				}
+				
+				System.out.format("%n%n%n%n%n%n");
+				
+				for(int a = 0; a < hand2.size(); a++){
+					
+					System.out.format("%s%n", hand2.remove());
+					
+				}
+				
+				break;
+				
+			}
 			
 			cardDraw();
-			
-			check1 = hand1.peek();
-			check2 = hand2.peek();
-			
-		}while(check1 != null || check2 !=null);
+						
+		}while(hand1.size() > 0 && hand2.size() > 0);
 		
 
-		if(check1 == null)
+		if(hand1.size() == 0)
 			System.out.format("%n%nOh no! You lost! ");
 		
-		if(check2 == null)
+		if(hand2.size() == 0)
 			System.out.format("%n%nYay! You Won!");
 		
 		in.close();
@@ -52,6 +70,8 @@ public class WarGame extends Card{
 	public static void cardDraw(){
 		
 		String card1, card2;
+		
+		System.out.format("%nCards Remaining: %2d         Cards Remaining: %2d", hand1.size(), hand2.size());
 		
 		try{
 			
@@ -73,7 +93,7 @@ public class WarGame extends Card{
 			
 		}
 		
-		System.out.format("%nCards Remaining: %2d         Cards Remaining: %2d", hand1.size(), hand2.size());
+		
 		
 		System.out.format("%n __________                  __________  "
 						+ "%n|          |                |          | "
@@ -109,20 +129,20 @@ public class WarGame extends Card{
 		field.add(card2);
 		field.add(card1);
 		
-			
 		System.out.format("%nThis means war! Press enter to draw your next card!%n");
 		
-		while(card1 == card2){
+		do{
 			
-			 
-			
+			in.nextLine();
+				
+				
 			try{
 			
 				card1 = hand1.remove();
-			
+				field.add(card1);
+				
 			}catch(NoSuchElementException e){
 				
-				in.close();
 				return;
 				
 			}
@@ -130,18 +150,14 @@ public class WarGame extends Card{
 			try{
 				
 				card2 = hand2.remove();
-			
-			}catch(NoSuchElementException e){
+				field.add(card2);
 				
-				in.close();
+			}catch(NoSuchElementException e){
+
 				return;
 				
 			}
-			
-			field.add(card2);
-			field.add(card1);
-			
-			
+					
 			System.out.format("%n __________                  __________  "
 					+ "%n|          |                |          | "
 					+ "%n|          |                |          | "
@@ -153,9 +169,7 @@ public class WarGame extends Card{
 			if(card1==card2){
 				
 				System.out.format("%nAnother War!! Press enter to draw your next card!%n%n%n");
-
-				 
-				
+			
 			}else if(Integer.parseInt(card1) > Integer.parseInt(card2)){
 				
 				System.out.format("%nYou won the war! Press enter to draw your next card.%n%n%n");
@@ -165,8 +179,7 @@ public class WarGame extends Card{
 					hand1.add(field.get(a));
 				
 				}
-				
-			
+							
 			}else if(Integer.parseInt(card1) < Integer.parseInt(card2)){
 				
 				System.out.format("%nYou lost the war! Press enter to draw your next card.%n%n%n");
@@ -177,10 +190,9 @@ public class WarGame extends Card{
 				
 				}
 				
-				
 			}
 			
-		}
+		}while(card1 == card2);
 		
 	}
 	
