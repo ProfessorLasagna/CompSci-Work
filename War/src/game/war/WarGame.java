@@ -7,41 +7,76 @@ import java.util.Scanner;
 public class WarGame extends Card{
 
 	public static Scanner in = new Scanner(System.in);
+	public static int handcur = 26, handcur2 = 26;
 	
 	public static void main(String args[]){
 		
-		Card card = new Card();
-		card.deck();
 		
-		Scanner in = new Scanner(System.in);
+		int win = 0, loss = 0, endless = 0, underone = 0, overone = 0;
 		
-		System.out.format("Welcome to the card game war!"
-				+ "%nThis game is a true test of luck. You will be computing against me, the computer!"
-				+ "%nI will deal twenty-six cards to you and then 26 to myself."
-				+ "%nWe will then begin by placing our first card down. The player with the highest value card wins both cards."
-				+ "%nIf we both draw the same card that means we have to go to war!"
-				+ "%nIn the case of war we will each place another two cards, one face up and the other down, on the playing field."
-				+ "%nThe player with the highest face up card gets all of the cards on the table!"
-				+ "%nThis will continue until one of us has no cards left."
-				+ "%n%nPlease press the 'Enter' key to begin!");
-		
-		do{	 
-
-			 
+		for(int a = 0; a < 10000; a++){
 			
-			cardDraw();
-						
-		}while(hand1.size() > 0 && hand2.size() > 0);
+			Card card = new Card();
+			
+			card.deck();
+			
+			int no = 0;
+			
+			System.out.format("Welcome to the card game war!"
+					+ "%nThis game is a true test of luck. You will be computing against me, the computer!"
+					+ "%nI will deal twenty-six cards to you and then 26 to myself."
+					+ "%nWe will then begin by placing our first card down. The player with the highest value card wins both cards."
+					+ "%nIf we both draw the same card that means we have to go to war!"
+					+ "%nIn the case of war we will each place another two cards, one face up and the other down, on the playing field."
+					+ "%nThe player with the highest face up card gets all of the cards on the table!"
+					+ "%nThis will continue until one of us has no cards left."
+					+ "%n%nPlease press the 'Enter' key to begin!");
+			
+			do{	 
+	
+				cardDraw();	
+				System.out.format("%n%nTurn:%d%n%n", no);
+				no++;
+							
+			}while(hand1.size() > 0 && hand2.size() > 0 && no < 10000);
+	
+			if(hand1.size() == 0){
+			
+				System.out.format("%nCards Remaining:  0         Cards Remaining: 52");
+				System.out.format("%n%nOh no! You lost! %nGame over!");
+				loss++;
+				
+				if(no < 1000)
+					underone++;
+				
+				else
+					overone++;
+			
+			}
+			
+			else if(hand2.size() == 0){
+				
+				System.out.format("%nCards Remaining: 52         Cards Remaining:  0");
+				System.out.format("%n%nYay! You Won! %nGame Over!");
+				win++;
+				
+				if(no < 1000)
+					underone++;
+				
+				else
+					overone++;
+				
+			}else{
+				endless++;
+			}
+			
+			hand1.removeAll(hand1);
+			hand2.removeAll(hand2);
+			
+		}
 		
-
-		if(hand1.size() == 0){
-			System.out.format("%nCards Remaining:  0         Cards Remaining: 52");
-			System.out.format("%n%nOh no! You lost! %nGame over!");
-		}
-		if(hand2.size() == 0){
-			System.out.format("%nCards Remaining: 52         Cards Remaining:  0");
-			System.out.format("%n%nYay! You Won! %nGame Over!");
-		}
+		System.out.format("%n%n%n%nWins: %d %nLosses: %d %nEndless: %d %n%nGames that took less than 1000 turns: %d"
+				+ "%nGames that took over 1000 turns: %d", win, loss, endless, underone, overone);
 		
 		in.close();
 	
@@ -162,6 +197,7 @@ public class WarGame extends Card{
 				
 				card4 = hand2.remove();
 				card2 = hand2.remove();
+				
 				field.add(card2);
 				field.add(card4);
 				
