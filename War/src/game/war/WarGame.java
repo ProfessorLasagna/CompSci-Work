@@ -1,4 +1,6 @@
- package game.war;
+//All commented code in this class is debug commands that were used to collect data on how the game functions.
+
+package game.war;
  
  import java.util.ArrayList;
  import java.util.NoSuchElementException;
@@ -14,7 +16,7 @@
  		
 // 		int win = 0, loss = 0, endless = 0, underone = 0, overone = 0;
 // 		
- 		//for(a = 0; a < 10000; a++){
+// 		for(a = 0; a < 10000; a++){
  			
  			Card card = new Card();
  			
@@ -72,13 +74,13 @@
 // 				endless++;
 // 			}
  			
- 		//	hand1.removeAll(hand1);
- 		//hand2.removeAll(hand2);
+// 			hand1.removeAll(hand1);
+// 		    hand2.removeAll(hand2);
  			
- 		//}
+// 		}
  		
- 		//System.out.format("%n%n%n%nWins: %d %nLosses: %d %nEndless: %d %n%nGames that took less than 1000 turns: %d"
- 			//	+ "%nGames that took over 1000 turns: %d", win, loss, endless, underone, overone);
+// 		System.out.format("%n%n%n%nWins: %d %nLosses: %d %nEndless: %d %n%nGames that took less than 1000 turns: %d"
+//				+ "%nGames that took over 1000 turns: %d", win, loss, endless, underone, overone);
  		
  		
  			}
