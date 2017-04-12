@@ -96,6 +96,7 @@ public class Bank {
 	
 	public static String changeActstr(){
 		
+		in.nextLine();
 		System.out.format("%n%nPlease enter your street address:");
 		String input = in.nextLine();
 		return(input);
