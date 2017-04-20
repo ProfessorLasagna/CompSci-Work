@@ -68,8 +68,17 @@ public class Shuffle {
 			
 		}
 		
+		deckstring += "\n";
+		
 		return(deckstring);
 		
 	}
 
+	public int hit(){
+		
+		int drawncard = Integer.parseInt(shuffledeck.remove());
+		return drawncard;
+		
+	}
+	
 }
