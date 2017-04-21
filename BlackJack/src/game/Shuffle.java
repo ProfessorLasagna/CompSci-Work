@@ -10,6 +10,41 @@ public class Shuffle {
 
 	public Shuffle(){
 
+		reshuffle();
+		
+	}
+	
+	public String toString(){
+		
+		String deckstring = "Cards:\n";
+		
+		for(int a = 0; a < 52; a++){
+			
+			deckstring += deck[a]+" ";
+			
+		}
+		
+		deckstring += "\n";
+		
+		return(deckstring);
+		
+	}
+
+	public int hit(){
+		
+		int drawncard = Integer.parseInt(shuffledeck.remove());
+		return drawncard;
+		
+	}
+	
+	public void reshuffle(){
+		
+		for(int p = 0; p < 52; p++){
+			
+			deck[p] = 0;
+			
+		}
+
 		int suitcount = 0;
 		int index = (int) (52 * Math.random());
 		int kingcount = 0;
@@ -55,29 +90,6 @@ public class Shuffle {
 			shuffledeck.offer(Integer.toString(deck[c]));
 			
 		}
-
-	}
-	
-	public String toString(){
-		
-		String deckstring = "Cards:\n";
-		
-		for(int a = 0; a < 52; a++){
-			
-			deckstring += deck[a]+" ";
-			
-		}
-		
-		deckstring += "\n";
-		
-		return(deckstring);
-		
-	}
-
-	public int hit(){
-		
-		int drawncard = Integer.parseInt(shuffledeck.remove());
-		return drawncard;
 		
 	}
 	
