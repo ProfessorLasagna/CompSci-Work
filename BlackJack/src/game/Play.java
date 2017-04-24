@@ -71,7 +71,7 @@ public class Play {
 					
 				}
 				
-				//System.out.format("%n%d : %d%n", playertotal, dealertotal);
+				System.out.format("%nYour Total : %d%n", playertotal);
 				
 				if(dealerstay && playerstay){
 					
