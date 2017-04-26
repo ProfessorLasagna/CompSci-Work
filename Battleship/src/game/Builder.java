@@ -1,14 +1,15 @@
 package game;
 
-public class Interface {
+public class Builder {
 	
 	public static int[] bb = new int[5];
 	public static int[] ca = new int[4];
 	public static int[] dd = new int[3];
 	public static int[] cl = new int[3];
 	public static int[] ss = new int[2];
+	public static int[] vb = new int[5];
 
-	public Interface(){
+	public Builder() {
 		
 		for(int a = 0; a < 5; a++){
 			
@@ -39,54 +40,53 @@ public class Interface {
 			ss[a] = -5;
 			
 		}
-	
-			printInterface(11, 0, 99, 3, 61, 0, 67, 1, 42, 2);
 		
 	}
 	
-	public void printInterface(int s1, int dir1, int s2, int dir2, int s3, int dir3,
-			int s4, int dir4, int s5, int dir5){
+	public boolean checkOverlap(int loc, int dir, int boat, boolean destroyer){
 		
-		int rows = 10;
-		int rownum = 1;
-		
-		findCoords(s1, dir1, 0);
-		findCoords(s2, dir2, 1);
-		findCoords(s3, dir3, 2);
-		findCoords(s4, dir4, 3);
-		findCoords(s5, dir5, 4);
-		
-		
-		System.out.format("      1  2  3  4  5  6  7  8  9  10%n"
-				+ "   ________________________________");
-		
-		for(int x = 0; x < 100; x++){
+		if(boat == 2){
 			
-			if(rows > 9){
-				
-				System.out.format("%n%2d | ", rownum);
-				rows = 0;
-				rownum++;
-				
-			}
+			vb = ss;
 			
-			if(bb[0] == x || bb[1] == x ||bb[2] == x ||bb[3] == x ||bb[4] == x || 
-					ca[0] == x || ca[1] == x || ca[2] == x || ca[3] == x || 
-					dd[0] == x || dd[1] == x || dd[2] == x ||
-					cl[0] == x || cl[1] == x || cl[2] == x ||
-					ss[0] == x || ss[1] == x){
-				
-				System.out.format(" B ");
-				rows++;
-				
-			}else{
-				
-				System.out.format(" + ");
-				rows++;
-				
-			}
+		}else if(boat == 3  && destroyer){
+			
+			vb = dd;
+			
+		}else if(boat == 3){
+			
+			vb = cl;
+			
+		}else if(boat == 4){
+			
+			vb = ca;
+			
+		}else if(boat == 5){
+			
+			vb = bb;
 			
 		}
+		
+		if(loc < 100 && loc >= 0){
+			
+			for(int a = 0; a < boat; a++){
+				
+				if(bb[0] == vb[a] || bb[1] == vb[a] ||bb[2] == vb[a] ||bb[3] == vb[a] ||bb[4] == vb[a] || 
+						ca[0] == vb[a] || ca[1] == vb[a] || ca[2] == vb[a] || ca[3] == vb[a] || 
+						dd[0] == vb[a] || dd[1] == vb[a] || dd[2] == vb[a] ||
+						cl[0] == vb[a] || cl[1] == vb[a] || cl[2] == vb[a] ||
+						ss[0] == vb[a] || ss[1] == vb[a]){
+					
+					return false;					
+					
+				}
+			
+			}
+			
+			return true;
+						
+		}else
+			return false;
 		
 	}
 	
@@ -233,5 +233,5 @@ public class Interface {
 		}
 	
 	}
-	
+
 }
