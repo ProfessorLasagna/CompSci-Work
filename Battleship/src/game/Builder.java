@@ -43,26 +43,33 @@ public class Builder {
 		
 	}
 	
-	public boolean checkOverlap(int loc, int dir, int boat, boolean destroyer){
+	public boolean checkOverlap(int loc, int dir, int boat){
 		
-		if(boat == 2){
+		findCoords(loc, dir, boat);
+		
+		if(boat == 4){
 			
+			boat = 2;
 			vb = ss;
 			
-		}else if(boat == 3  && destroyer){
+		}else if(boat == 2){
 			
+			boat = 3;
 			vb = dd;
 			
 		}else if(boat == 3){
 			
+			boat = 3;
 			vb = cl;
 			
-		}else if(boat == 4){
+		}else if(boat == 1){
 			
+			boat = 4;
 			vb = ca;
 			
-		}else if(boat == 5){
+		}else if(boat == 0){
 			
+			boat = 5;
 			vb = bb;
 			
 		}
@@ -71,14 +78,35 @@ public class Builder {
 			
 			for(int a = 0; a < boat; a++){
 				
-				if(bb[0] == vb[a] || bb[1] == vb[a] ||bb[2] == vb[a] ||bb[3] == vb[a] ||bb[4] == vb[a] || 
-						ca[0] == vb[a] || ca[1] == vb[a] || ca[2] == vb[a] || ca[3] == vb[a] || 
-						dd[0] == vb[a] || dd[1] == vb[a] || dd[2] == vb[a] ||
-						cl[0] == vb[a] || cl[1] == vb[a] || cl[2] == vb[a] ||
-						ss[0] == vb[a] || ss[1] == vb[a]){
+//				if(bb[0] == vb[a] || bb[1] == vb[a] ||bb[2] == vb[a] ||bb[3] == vb[a] ||bb[4] == vb[a] || 
+//						ca[0] == vb[a] || ca[1] == vb[a] || ca[2] == vb[a] || ca[3] == vb[a] || 
+//						dd[0] == vb[a] || dd[1] == vb[a] || dd[2] == vb[a] ||
+//						cl[0] == vb[a] || cl[1] == vb[a] || cl[2] == vb[a] ||
+//						ss[0] == vb[a] || ss[1] == vb[a]){
+//					
+//					return false;				
+//				
+//				}
+			
+			
+	
+		}
+		
+			for(int b = 0; b < vb.length; b++){
+				
+				
+				int total =+ vb[b];
+				
+				if(vb[b] < 0 || vb[b] > 100){
 					
-					return false;					
-					
+					return false;
+				
+				}
+				
+				if(total % 10 >  9){
+				
+					return false;
+				
 				}
 			
 			}
@@ -89,6 +117,8 @@ public class Builder {
 			return false;
 		
 	}
+	
+	
 	
 	public static void findCoords(int s, int dir, int clas){
 		

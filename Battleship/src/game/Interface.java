@@ -39,23 +39,13 @@ public class Interface {
 			ss[a] = -5;
 			
 		}
-	
-			printInterface(11, 0, 99, 3, 61, 0, 67, 1, 42, 2);
 		
 	}
 	
-	public void printInterface(int s1, int dir1, int s2, int dir2, int s3, int dir3,
-			int s4, int dir4, int s5, int dir5){
+	public void printInterface(){
 		
 		int rows = 10;
 		int rownum = 1;
-		
-		findCoords(s1, dir1, 0);
-		findCoords(s2, dir2, 1);
-		findCoords(s3, dir3, 2);
-		findCoords(s4, dir4, 3);
-		findCoords(s5, dir5, 4);
-		
 		
 		System.out.format("      1  2  3  4  5  6  7  8  9  10%n"
 				+ "   ________________________________");
@@ -90,7 +80,7 @@ public class Interface {
 		
 	}
 	
-	public static void findCoords(int s, int dir, int clas){
+	public void findCoords(int s, int dir, int clas){
 		
 		if(clas == 0){
 			
