@@ -11,47 +11,15 @@ public class Play {
 
 	public static void main(String args[]){
 
-		int coord, dir, col, row;
-		char direction;
-
 		board.printInterface();
+		
+		userPlace(0);
+		userPlace(1);
+		userPlace(2);
+		userPlace(3);
+		userPlace(4);
 
-		do{
-
-		System.out.format("%nPlease enter the column you would like to place your battleship in:");
-
-		col = in.nextInt();
-
-		System.out.format("%nPlease enter the row you would like to place your battleship in:");
-
-		row = in.nextInt();
-
-		System.out.format("%nPlease enter the diretion you want your battleship facing."
-				+ "%n(U)p, (D)own, (L)eft, (R)ight%n");
-
-		direction = in.next().toUpperCase().charAt(0);
-
-		switch(direction){
-
-		case 85: dir = 3;
-				break;
-
-		case 68: dir = 1;
-				break;
-
-		case 76: dir = 2;
-				break;
-
-		}
-
-		dir = in.nextInt();
-
-		coord = (row-1) * 10 + (col-1);
-
-		}while(placeShip(coord, dir, 0));
-
-		board.printInterface();
-
+	
 	}
 
 	public static boolean placeShip(int coord, int dir, int val){
@@ -71,4 +39,72 @@ public class Play {
 
 	}
 
+	public static void userPlace(int shiptype){
+		
+		int coord, dir = 0, col, row;
+		char direction;
+		String ship = null;
+		
+		if(shiptype == 0){
+			
+			ship = "Battleship (5)";
+			
+		}else if(shiptype == 1){
+			
+			ship = "Heavy Cruiser (4)";
+			
+		}else if(shiptype == 2){
+			
+			ship = "Destroyer (3)";
+			
+		}else if(shiptype == 3){
+			
+			ship = "Light Cruiser (3)";
+			
+		}else if(shiptype == 4){
+			
+			ship = "Submarine (2)";
+			
+		}
+		
+		do{
+
+			System.out.format("%n%nPlease enter the column you would like to place your %s in:", ship);
+
+			col = in.nextInt();
+
+			System.out.format("%nPlease enter the row you would like to place your %s in:", ship);
+
+			row = in.nextInt();
+
+			System.out.format("%nPlease enter the diretion you want your %s facing."
+					+ "%n(U)p, (D)own, (L)eft, (R)ight%n", ship);
+
+			direction = in.next().toUpperCase().charAt(0);
+
+			switch(direction){
+
+			case 85: dir = 3;
+					break;
+
+			case 68: dir = 1;
+					break;
+
+			case 76: dir = 2;
+					break;
+					
+			case 82: dir = 0;
+					break;
+
+			}
+
+			coord = (row-1) * 10 + (col-1);
+
+			}while(placeShip(coord, dir, shiptype));
+
+			board.printInterface();
+
+		
+	}
+	
 }

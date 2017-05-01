@@ -100,10 +100,9 @@ public class Builder {
 
 		if(loc < 100 && loc >= 0){
 
-			for(int a = 0; a < vb.length; a++){
+			for(int a = 0; a < 5; a++){
 
 				if(vb[a] == va[a] || vb[a] == vd[a] || vb[a] == vc[a] || vb[a] == ve[a]){
-
 					
 					return false;
 
@@ -123,7 +122,7 @@ public class Builder {
 
 				}
 
-				if((dir == 0 || dir == 2) && vb[b] / 10 > loc / 10){
+				if((dir == 0 || dir == 2) && ((vb[b] - (vb[b] % 10)) / 10) > (loc - (loc % 10)) / 10 || ((vb[b] - (vb[b] % 10)) / 10) < (loc - (loc % 10)) / 10){
 
 					return false;
 
