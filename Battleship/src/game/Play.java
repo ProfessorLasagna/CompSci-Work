@@ -4,29 +4,34 @@ import java.util.Scanner;
 
 public class Play {
 
-	public static Interface board = new Interface();
-	public static Builder build = new Builder();
-
+	public static Interface playerboard = new Interface();
+	public static Interface aiboard = new Interface();
+	public static Builder playerbuild = new Builder();
+	public static Builder aibuild = new Builder();
+	
+	
 	public static Scanner in = new Scanner(System.in);
 
 	public static void main(String args[]){
 
-		board.printInterface();
-		
-		userPlace(0);
-		userPlace(1);
-		userPlace(2);
-		userPlace(3);
-		userPlace(4);
+//		playerboard.printInterface();
+//		
+//		userPlace(0);
+//		userPlace(1);
+//		userPlace(2);
+//		userPlace(3);
+//		userPlace(4);
+		aiPlace();
+		aiboard.printInterface();
 
 	
 	}
 
 	public static boolean placeShip(int coord, int dir, int val){
 
-		if(build.checkOverlap(coord, dir, val)){
+		if(playerbuild.checkOverlap(coord, dir, val)){
 
-			board.findCoords(coord, dir, val);
+			playerboard.findCoords(coord, dir, val);
 			return false;
 
 		}else{
@@ -37,6 +42,27 @@ public class Play {
 		}
 
 
+	}
+	
+	public static void aiPlace(){
+		
+		int val = 0;
+		int coord = 1, dir = 0;
+		
+		while(val < 5){
+			
+			coord =(int)(100*Math.random());
+			dir = (int)(3*Math.random());
+		
+			if(playerbuild.checkOverlap(coord, dir, val)){
+
+				aiboard.findCoords(coord, dir, val);
+				val++;
+
+			}
+		
+		}
+		
 	}
 
 	public static void userPlace(int shiptype){
@@ -102,7 +128,7 @@ public class Play {
 
 			}while(placeShip(coord, dir, shiptype));
 
-			board.printInterface();
+			playerboard.printInterface();
 
 		
 	}

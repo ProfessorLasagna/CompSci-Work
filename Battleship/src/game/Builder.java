@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Builder {
 
@@ -9,19 +10,25 @@ public class Builder {
 	static ArrayList<Integer> dd =new ArrayList<Integer>();
 	static ArrayList<Integer> cl =new ArrayList<Integer>();
 	static ArrayList<Integer> ss =new ArrayList<Integer>();
-	ArrayList<Integer> vb =new ArrayList<Integer>();
-	ArrayList<Integer> va =new ArrayList<Integer>();
-	ArrayList<Integer> vc =new ArrayList<Integer>();
-	ArrayList<Integer> vd =new ArrayList<Integer>();
-	ArrayList<Integer> ve =new ArrayList<Integer>();
+	static ArrayList<Integer> vb =new ArrayList<Integer>();
+	static ArrayList<Integer> va =new ArrayList<Integer>();
+	static ArrayList<Integer> vc =new ArrayList<Integer>();
+	static ArrayList<Integer> vd =new ArrayList<Integer>();
+	static ArrayList<Integer> ve =new ArrayList<Integer>();
 
 	public Builder() {
 
+		vb.clear();
+		va.clear();
+		vc.clear();
+		vd.clear();
+		ve.clear();
 
 	}
 
 	public boolean checkOverlap(int loc, int dir, int boat){
 
+		boolean dest = false;
 		vb.clear();
 		va.clear();
 		vc.clear();
@@ -34,189 +41,138 @@ public class Builder {
 		if(boat == 4){
 
 			boat = 2;
-			vb = ss;
-			va = dd;
-			vc = cl;
-			vd = bb;
-			ve = ca;
-
-			vb.add(ss.get(1));
-			vb.add(ss.get(1));
-			vb.add(ss.get(1));
-
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
+			vb.addAll(ss);
+			va.addAll(dd);
+			vc.addAll(cl);
+			vd.addAll(bb);
+			ve.addAll(ca);
 
 		}else if(boat == 2){
 
 			boat = 3;
-			vb = dd;
-			va = ss;
-			vc = cl;
-			vd = bb;
-			ve = ca;
-
-			vb.add(0);
-			vb.add(0);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
+			vb.addAll(dd);
+			va.addAll(ss);
+			vc.addAll(cl);
+			vd.addAll(bb);
+			ve.addAll(ca);
+			dest = true;
 
 		}else if(boat == 3){
 
 			boat = 3;
-			vb = cl;
-			va = dd;
-			vc = ss;
-			vd = bb;
-			ve = ca;
-
-			vb.add(0);
-			vb.add(0);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
+			vb.addAll(cl);
+			va.addAll(dd);
+			vc.addAll(ss);
+			vd.addAll(bb);
+			ve.addAll(ca);
 
 		}else if(boat == 1){
 
 			boat = 4;
-			vb = ca;
-			va = dd;
-			vc = cl;
-			vd = bb;
-			ve = ss;
-
-			vb.add(0);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
+			vb.addAll(ca);
+			va.addAll(dd);
+			vc.addAll(cl);
+			vd.addAll(bb);
+			ve.addAll(ss);
 
 		}else if(boat == 0){
 
 			boat = 5;
-			vb = bb;
-			va = dd;
-			vc = cl;
-			vd = ss;
-			ve = ca;
-
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			va.add(-2);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vc.add(-3);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			vd.add(-4);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-			ve.add(-5);
-
+			vb.addAll(bb);
+			va.addAll(dd);
+			vc.addAll(cl);
+			vd.addAll(ss);
+			ve.addAll(ca);
 
 		}
 
 		if(loc < 100 && loc >= 0){
 
-			for(int a = 0; a < vb.size(); a++){
+			
+			if(!Collections.disjoint(vb, va) || !Collections.disjoint(vb, vc) || !Collections.disjoint(vb, vd) || !Collections.disjoint(vb, ve)){
+				
+				if(boat == 2){
 
-				if(vb.get(a) == va.get(a) || vb.get(a) == vd.get(a) || vb.get(a) == vc.get(a) || vb.get(a) == ve.get(a)){
+					ss.clear();
 
+				}else if(boat == 3 && dest){
 
+					dd.clear();
 
-					return false;
+				}else if(boat == 3){
+
+					cl.clear();
+
+				}else if(boat == 4){
+
+					ca.clear();
+
+				}else if(boat == 5){
+
+					bb.clear();
 
 				}
+				
+				return false;
 
 			}
 
 			for(int b = 0; b < vb.size(); b++){
 
 				if(vb.get(b) < 0 || vb.get(b) > 100){
-System.out.println(b+" "+vb.get(b));
+					
+					if(boat == 2){
+
+						ss.clear();
+
+					}else if(boat == 3 && dest){
+
+						dd.clear();
+
+					}else if(boat == 3){
+
+						cl.clear();
+
+					}else if(boat == 4){
+
+						ca.clear();
+
+					}else if(boat == 5){
+
+						bb.clear();
+
+					}
+					
+	
 					return false;
 
 				}
 
 				if((dir == 0 || dir == 2) && ((vb.get(b) - (vb.get(b) % 10)) / 10) != (loc - (loc % 10)) / 10){
 
+					if(boat == 2){
+
+						ss.clear();
+
+					}else if(boat == 3 && dest){
+
+						dd.clear();
+
+					}else if(boat == 3){
+
+						cl.clear();
+
+					}else if(boat == 4){
+
+						ca.clear();
+
+					}else if(boat == 5){
+
+						bb.clear();
+
+					}
+					
+					
 					return false;
 
 				}
@@ -225,9 +181,34 @@ System.out.println(b+" "+vb.get(b));
 
 			return true;
 
-		}else
+		}else{
+			
+			if(boat == 2){
+
+				ss.clear();
+
+			}else if(boat == 3 && dest){
+
+				dd.clear();
+
+			}else if(boat == 3){
+
+				cl.clear();
+
+			}else if(boat == 4){
+
+				ca.clear();
+
+			}else if(boat == 5){
+
+				bb.clear();
+
+			}
+			
 			return false;
 
+		}
+			
 	}
 
 
