@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 public class Interface {
 	
 	public static int[] bb = new int[5];
@@ -7,7 +9,9 @@ public class Interface {
 	public static int[] dd = new int[3];
 	public static int[] cl = new int[3];
 	public static int[] ss = new int[2];
-
+	public ArrayList<Integer> hitstat =new ArrayList<Integer>();
+	public ArrayList<Integer> missstat =new ArrayList<Integer>();
+	
 	public Interface(){
 		
 		for(int a = 0; a < 5; a++){
@@ -66,12 +70,26 @@ public class Interface {
 					cl[0] == x || cl[1] == x || cl[2] == x ||
 					ss[0] == x || ss[1] == x){
 				
-				System.out.format(" B ");
-				rows++;
+				if(hitstat.contains(x)){
+					
+					System.out.format(" X ");
+					rows++;
+					
+				}else if(missstat.contains(x)){
 				
+					System.out.format(" O ");
+					rows++;
+					
+				}else{
+	
+					System.out.format(" B ");
+					rows++;
+				
+				}
+					
 			}else{
 				
-				System.out.format(" + ");
+				System.out.format(" ~ ");
 				rows++;
 				
 			}

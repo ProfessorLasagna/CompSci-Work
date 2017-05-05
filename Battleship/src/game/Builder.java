@@ -142,8 +142,7 @@ public class Builder {
 						bb.clear();
 
 					}
-					
-	
+
 					return false;
 
 				}
@@ -210,8 +209,6 @@ public class Builder {
 		}
 			
 	}
-
-
 
 	public static void findCoords(int s, int dir, int clas){
 
@@ -355,6 +352,17 @@ public class Builder {
 
 		}
 
+	}
+
+	public boolean fireShell(int coord){
+		
+		if(bb.contains(coord) || ca.contains(coord) || cl.contains(coord) || dd.contains(coord) || ss.contains(coord)){
+			
+			return true;
+			
+		}else
+			return false;
+		
 	}
 
 }

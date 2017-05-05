@@ -23,6 +23,8 @@ public class Play {
 //		userPlace(4);
 		aiPlace();
 		aiboard.printInterface();
+		pAttack();
+		aiboard.printInterface();
 
 	
 	}
@@ -133,4 +135,30 @@ public class Play {
 		
 	}
 	
+	public static void pAttack(){
+		
+		int coord, col = 0, row = 0;
+		
+		System.out.format("%nPlease enter the column you would like to attack:");
+		col = in.nextInt();
+		
+		System.out.format("%nPlease enter the row you would like to attack:");
+		row = in.nextInt();
+		
+		coord = (row-1) * 10 + (col-1);
+		
+		if(aibuild.fireShell(coord)){
+			
+			System.out.format("%nIt's a hit!%n%n");
+			aiboard.hitstat.add(coord);
+			
+		}else{
+			
+			System.out.format("%nYou missed!%n%n");
+			aiboard.missstat.add(coord);
+			
+		}
+
+	}
+
 }
