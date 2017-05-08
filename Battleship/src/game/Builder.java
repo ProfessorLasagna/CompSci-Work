@@ -5,19 +5,24 @@ import java.util.Collections;
 
 public class Builder {
 
-	static ArrayList<Integer> bb =new ArrayList<Integer>();
-	static ArrayList<Integer> ca =new ArrayList<Integer>();
-	static ArrayList<Integer> dd =new ArrayList<Integer>();
-	static ArrayList<Integer> cl =new ArrayList<Integer>();
-	static ArrayList<Integer> ss =new ArrayList<Integer>();
-	static ArrayList<Integer> vb =new ArrayList<Integer>();
-	static ArrayList<Integer> va =new ArrayList<Integer>();
-	static ArrayList<Integer> vc =new ArrayList<Integer>();
-	static ArrayList<Integer> vd =new ArrayList<Integer>();
-	static ArrayList<Integer> ve =new ArrayList<Integer>();
+	ArrayList<Integer> bb =new ArrayList<Integer>();
+	ArrayList<Integer> ca =new ArrayList<Integer>();
+	ArrayList<Integer> dd =new ArrayList<Integer>();
+	ArrayList<Integer> cl =new ArrayList<Integer>();
+	ArrayList<Integer> ss =new ArrayList<Integer>();
+	ArrayList<Integer> vb =new ArrayList<Integer>();
+	ArrayList<Integer> va =new ArrayList<Integer>();
+	ArrayList<Integer> vc =new ArrayList<Integer>();
+	ArrayList<Integer> vd =new ArrayList<Integer>();
+	ArrayList<Integer> ve =new ArrayList<Integer>();
 
 	public Builder() {
 
+		bb.clear();
+		ca.clear();
+		dd.clear();
+		cl.clear();
+		ss.clear();
 		vb.clear();
 		va.clear();
 		vc.clear();
@@ -26,7 +31,7 @@ public class Builder {
 
 	}
 
-	public boolean checkOverlap(int loc, int dir, int boat){
+	boolean checkOverlap(int loc, int dir, int boat){
 
 		boolean dest = false;
 		vb.clear();
@@ -171,7 +176,6 @@ public class Builder {
 
 					}
 					
-					
 					return false;
 
 				}
@@ -210,7 +214,7 @@ public class Builder {
 			
 	}
 
-	public static void findCoords(int s, int dir, int clas){
+	public void findCoords(int s, int dir, int clas){
 
 		if(clas == 0){
 

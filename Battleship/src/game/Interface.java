@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 public class Interface {
 	
-	public static int[] bb = new int[5];
-	public static int[] ca = new int[4];
-	public static int[] dd = new int[3];
-	public static int[] cl = new int[3];
-	public static int[] ss = new int[2];
-	public ArrayList<Integer> hitstat =new ArrayList<Integer>();
-	public ArrayList<Integer> missstat =new ArrayList<Integer>();
+ int[] bb = new int[5];
+ int[] ca = new int[4];
+ int[] dd = new int[3];
+ int[] cl = new int[3];
+ int[] ss = new int[2];
+ boolean player = false;
+ ArrayList<Integer> hitstat =new ArrayList<Integer>();
+ ArrayList<Integer> missstat =new ArrayList<Integer>();
 	
 	public Interface(){
 		
@@ -69,29 +70,27 @@ public class Interface {
 				System.out.format(" O ");
 				rows++;
 				
-			}
-			
-			if(bb[0] == x || bb[1] == x ||bb[2] == x ||bb[3] == x ||bb[4] == x || 
+			}else if(bb[0] == x || bb[1] == x ||bb[2] == x ||bb[3] == x ||bb[4] == x || 
 					ca[0] == x || ca[1] == x || ca[2] == x || ca[3] == x || 
 					dd[0] == x || dd[1] == x || dd[2] == x ||
 					cl[0] == x || cl[1] == x || cl[2] == x ||
 					ss[0] == x || ss[1] == x){
-				
+
 				if(hitstat.contains(x)){
-					
+
 					System.out.format(" X ");
 					rows++;
-					
-//				}else if(missstat.contains(x)){
-//				
-//					System.out.format(" O ");
-//					rows++;
-//					
-				}else{
-	
+
+				}else if(player){
+
 					System.out.format(" B ");
 					rows++;
 				
+				}else{
+					
+					System.out.format(" ~ ");
+					rows++;
+					
 				}
 					
 			}else{
@@ -102,6 +101,8 @@ public class Interface {
 			}
 			
 		}
+		
+		System.out.format("%n");
 		
 	}
 	
