@@ -64,6 +64,13 @@ public class Interface {
 				
 			}
 			
+			if(missstat.contains(x)){
+				
+				System.out.format(" O ");
+				rows++;
+				
+			}
+			
 			if(bb[0] == x || bb[1] == x ||bb[2] == x ||bb[3] == x ||bb[4] == x || 
 					ca[0] == x || ca[1] == x || ca[2] == x || ca[3] == x || 
 					dd[0] == x || dd[1] == x || dd[2] == x ||
@@ -75,11 +82,11 @@ public class Interface {
 					System.out.format(" X ");
 					rows++;
 					
-				}else if(missstat.contains(x)){
-				
-					System.out.format(" O ");
-					rows++;
-					
+//				}else if(missstat.contains(x)){
+//				
+//					System.out.format(" O ");
+//					rows++;
+//					
 				}else{
 	
 					System.out.format(" B ");
