@@ -362,7 +362,30 @@ public class Builder {
 		
 		if(bb.contains(coord) || ca.contains(coord) || cl.contains(coord) || dd.contains(coord) || ss.contains(coord)){
 			
+			if(bb.contains(coord)){
+				
+				bb.remove(bb.indexOf(coord));
+				
+			}else if(ca.contains(coord)){
+				
+				ca.remove(ca.indexOf(coord));
+				
+			}else if(cl.contains(coord)){
+				
+				cl.remove(cl.indexOf(coord));
+				
+			}else if(dd.contains(coord)){
+				
+				dd.remove(dd.indexOf(coord));
+				
+			}else if(ss.contains(coord)){
+				
+				ss.remove(ss.indexOf(coord));
+				
+			}
+			
 			return true;
+			
 			
 		}else
 			return false;

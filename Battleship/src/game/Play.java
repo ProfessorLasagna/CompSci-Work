@@ -16,28 +16,35 @@ public class Play {
 
 	public static void main(String args[]){
 
+		System.out.format("Hello! This is the game of Battleship. %nPlease press enter to begin your setup.%n");
+		
+		in.nextLine();
+		
 		playerboard.player = true;
+		aiboard.player = true;
 		aiPlace();
 
-		playerboard.printInterface();
-
-		userPlace(0);
-		userPlace(1);
-		userPlace(2);
-		userPlace(3);
-		userPlace(4);
+//		playerboard.printInterface();
+//
+//		userPlace(0);
+//		userPlace(1);
+//		userPlace(2);
+//		userPlace(3);
+//		userPlace(4);
 
 		do{
 
 			System.out.format("%n%n%nYou:%n%n");
 			playerboard.printInterface();
-			//System.out.format("%n%n%nThe enemy:%n%n");
-			//aiboard.printInterface();
-			//pAttack();
+			System.out.format("%n%n%nThe enemy:%n%n");
+			aiboard.printInterface();
+			pAttack();
 			aiAttack();
 
 		}while(ahit < 16 || phit < 16);
 
+		in.close();
+		
 	}
 
 	public static boolean placeShip(int coord, int dir, int val){
