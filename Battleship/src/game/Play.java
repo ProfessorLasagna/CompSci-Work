@@ -21,16 +21,16 @@ public class Play {
 		in.nextLine();
 		
 		playerboard.player = true;
-		aiboard.player = true;
+		//aiboard.player = true;
 		aiPlace();
 
-//		playerboard.printInterface();
-//
-//		userPlace(0);
-//		userPlace(1);
-//		userPlace(2);
-//		userPlace(3);
-//		userPlace(4);
+		playerboard.printInterface();
+
+		userPlace(0);
+		userPlace(1);
+		userPlace(2);
+		userPlace(3);
+		userPlace(4);
 
 		do{
 
@@ -43,6 +43,16 @@ public class Play {
 
 		}while(ahit < 16 || phit < 16);
 
+		if(ahit > 16){
+			
+			System.out.format("Congratulations you won!");
+			
+		}else{
+			
+			System.out.format("Oh no! He sunk all your ships!");
+			
+		}
+		
 		in.close();
 		
 	}

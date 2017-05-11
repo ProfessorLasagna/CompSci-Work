@@ -65,7 +65,12 @@ public class Interface {
 				
 			}
 			
-			if(missstat.contains(x)){
+			if(hitstat.contains(x)){
+
+					System.out.format(" X ");
+					rows++;
+				
+			}else if(missstat.contains(x)){
 				
 				System.out.format(" O ");
 				rows++;
@@ -76,12 +81,7 @@ public class Interface {
 					cl[0] == x || cl[1] == x || cl[2] == x ||
 					ss[0] == x || ss[1] == x){
 
-				if(hitstat.contains(x)){
-
-					System.out.format(" X ");
-					rows++;
-
-				}else if(player){
+				if(player){
 
 					System.out.format(" B ");
 					rows++;

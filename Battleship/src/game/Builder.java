@@ -297,7 +297,7 @@ public class Builder {
 			}else if(dir == 2){
 
 				dd.add(s-1);
-				dd.add(s-1);
+				dd.add(s-2);
 
 			}else if(dir == 3){
 
