@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Play {
@@ -8,6 +9,8 @@ public class Play {
 	public static Interface aiboard = new Interface();
 	public static Builder playerbuild = new Builder();
 	public static Builder aibuild = new Builder();
+	
+	static ArrayList<Integer> used = new ArrayList<Integer>();
 
 	public static int phit = 0;
 	public static int ahit= 0;
@@ -34,22 +37,24 @@ public class Play {
 
 		do{
 
+			System.out.format("%d : %d", ahit, phit);
 			System.out.format("%n%n%nYou:%n%n");
 			playerboard.printInterface();
 			System.out.format("%n%n%nThe enemy:%n%n");
 			aiboard.printInterface();
 			pAttack();
 			aiAttack();
+			
+		}while((ahit <= 16) && (phit <= 16));
 
-		}while(ahit < 16 || phit < 16);
-
-		if(ahit > 16){
+		if(phit > 16){
 			
 			System.out.format("Congratulations you won!");
 			
 		}else{
 			
-			System.out.format("Oh no! He sunk all your ships!");
+			System.out.format("Oh no! He sunk all your ships!"
+					+ "%nGame over!");
 			
 		}
 		
@@ -193,18 +198,24 @@ public class Play {
 
 		int coord = 0;
 
-		coord = (int)(100*Math.random());
+		do{
+		
+			coord = (int)(100*Math.random());
 
+		}while(used.contains(coord));
+		
 		if(playerbuild.fireShell(coord)){
 
 			System.out.format("%nYou've been hit!%n%n");
 			playerboard.hitstat.add(coord);
 			ahit++;
+			used.add(coord);
 
 		}else{
 
 			System.out.format("%nThey missed!%n%n");
 			playerboard.missstat.add(coord);
+			used.add(coord);
 
 		}
 
