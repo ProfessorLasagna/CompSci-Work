@@ -4,11 +4,11 @@ public class Calc {
 
 	public static void main(String[] args) {
 		
-				System.out.println(fact(28));
+				System.out.println(fact(20));
 
 	}
 
-	public static int fact(int n){
+	public static long fact(long n){
 		
 		if(n == 0)
 			return 1;
