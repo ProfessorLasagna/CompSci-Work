@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class Scramble {
 
-	private static String[][] board = new String[5][5];
+	static String[][] board = new String[5][5];
 	private static Queue<String> letters = new LinkedList<String>();
 	private static char[] letstore = new char[26];
 
@@ -19,6 +19,8 @@ public class Scramble {
 			let++;
 
 		}
+
+		scrambler();
 
 	}
 
@@ -46,6 +48,8 @@ public class Scramble {
 
 		}
 
+		setter(0);
+
 	}
 
 	public static void setter(int rownum){
@@ -56,7 +60,7 @@ public class Scramble {
 
 		}
 
-		if(rownum < 5){
+		if(rownum < 4){
 
 			setter(rownum + 1);
 
