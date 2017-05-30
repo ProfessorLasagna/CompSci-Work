@@ -1,15 +1,21 @@
 package game;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.stream.*;
+
 
 public class Scramble {
 
-	static String[][] board = new String[5][5];
 	private static Queue<String> letters = new LinkedList<String>();
 	private static char[] letstore = new char[26];
 
 	public Scramble(){
+
+	}
+
+	public String[][] scrambler(){
 
 		char let = 65;
 
@@ -19,12 +25,6 @@ public class Scramble {
 			let++;
 
 		}
-
-		scrambler();
-
-	}
-
-	public static void scrambler(){
 
 		int a = 0;
 
@@ -48,23 +48,29 @@ public class Scramble {
 
 		}
 
-		setter(0);
+		return(setter(0));
 
 	}
 
-	public static void setter(int rownum){
+	public static String[][] setter(int rownum){
+
+		String[][] board = new String[5][5];
+		String[][] comb = new String[5][5];
 
 		for(int a = 0; a < 5; a++){
 
-			board[rownum][a] = letters.remove();
+			board[0][a] = letters.remove();
 
 		}
 
 		if(rownum < 4){
 
-			setter(rownum + 1);
+			comb = Stream.concat(Arrays.stream(board), Arrays.stream(setter(rownum+1)))
+                    .toArray(String[][]::new);
 
 		}
+
+		return(comb);
 
 	}
 
