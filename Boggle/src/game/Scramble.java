@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.*;
 
-
 public class Scramble {
 
 	private static Queue<String> letters = new LinkedList<String>();
@@ -26,13 +25,13 @@ public class Scramble {
 
 		}
 
-		int a = 0;
+		int a = (int)(26*Math.random());
 
 		for(int b = 0; b < 26; b++){
 
 			while(true){
 
-				if(letstore[a] < 65 || letstore[a] > 90){
+				if(letstore[a] == 0){
 
 					a = (int)(26*Math.random());
 
@@ -54,8 +53,7 @@ public class Scramble {
 
 	public static String[][] setter(int rownum){
 
-		String[][] board = new String[5][5];
-		String[][] comb = new String[5][5];
+		String[][] board = new String[1][5];
 
 		for(int a = 0; a < 5; a++){
 
@@ -65,12 +63,12 @@ public class Scramble {
 
 		if(rownum < 4){
 
-			comb = Stream.concat(Arrays.stream(board), Arrays.stream(setter(rownum+1)))
+			board = Stream.concat(Arrays.stream(board), Arrays.stream(setter(rownum+1)))
                     .toArray(String[][]::new);
 
 		}
 
-		return(comb);
+		return(board);
 
 	}
 
