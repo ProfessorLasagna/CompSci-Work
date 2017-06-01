@@ -8,7 +8,7 @@ import java.util.stream.*;
 public class Scramble {
 
 	private static Queue<String> letters = new LinkedList<String>();
-	private static char[] letstore = new char[26];
+	private static char[] letstore = new char[52];
 
 	public Scramble(){
 

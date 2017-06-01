@@ -1,24 +1,227 @@
 package game;
 
-public class AdjCheck {
-	
-	private int row, column;
+import java.lang.ArrayIndexOutOfBoundsException;
 
-	public boolean adj(String[][] board, String input){
+public class AdjCheck {
+
+	private static int row = -1;
+	private static int column = -1;
+
+	public static boolean adj(String[][] board, String input, int depth){
+
+		findLetter(board, input);
+
+		if(depth > input.length())
+			return(true);
+
+		try{
+
+			if(board[row+1][column-1].equals(input.substring(depth, depth+1))){
+
+				row = row+1;
+				column = column -1;
+
+				if(adj(board, input, depth+1)){
+
+					return(true);
+
+				}else{
+
+					return(false);
+
+				}
+
+			}
+
+		}catch(ArrayIndexOutOfBoundsException ex){
+
+		}
+
+		try{
+
+			if(board[row+1][column].equals(input.substring(depth, depth+1))){
+
+				row = row+1;
+
+				if(adj(board, input, depth+1)){
+
+					return(true);
+
+				}else{
+
+					return(false);
+
+				}
+
+			}
+
+		}catch(ArrayIndexOutOfBoundsException ex){
+
+		}
+
+		try{
+
+			if(board[row+1][column+1].equals(input.substring(depth, depth+1))){
+
+				row = row+1;
+				column = column + 1;
+
+				if(adj(board, input, depth+1)){
+
+					return(true);
+
+				}else{
+
+					return(false);
+
+				}
+
+			}
+
+		}catch(ArrayIndexOutOfBoundsException ex){
+
+		}
+
+		try{
+
+			if(board[row][column-1].equals(input.substring(depth, depth+1))){
+
+				column = column - 1;
+
+				if(adj(board, input, depth+1)){
+
+					return(true);
+
+				}else{
+
+					return(false);
+
+				}
+
+			}
+
+		}catch(ArrayIndexOutOfBoundsException ex){
+
+		}
+
+		try{
+
+			if(board[row][column+1].equals(input.substring(depth, depth+1))){
+
+				column = column + 1;
+
+				if(adj(board, input, depth+1)){
+
+					return(true);
+
+				}else{
+
+					return(false);
+
+				}
+
+			}
+
+		}catch(ArrayIndexOutOfBoundsException ex){
+
+		}
+
+		try{
+
+			if(board[row-1][column-1].equals(input.substring(depth, depth+1))){
+
+				row = row-1;
+				column = column - 1;
+
+				if(adj(board, input, depth+1)){
+
+					return(true);
+
+				}else{
+
+					return(false);
+
+				}
+
+			}
+
+		}catch(ArrayIndexOutOfBoundsException ex){
+
+		}
+
+		try{
+
+			if(board[row-1][column].equals(input.substring(depth, depth+1))){
+
+				row = row - 1;
+
+				if(adj(board, input, depth+1)){
+
+					return(true);
+
+				}else{
+
+					return(false);
+
+				}
+
+			}
+
+		}catch(ArrayIndexOutOfBoundsException ex){
+
+		}
+
+		try{
+
+			if(board[row-1][column+1].equals(input.substring(depth, depth+1))){
+
+				row = row-1;
+				column = column + 1;
+
+				if(adj(board, input, depth+1)){
+
+					return(true);
+
+				}else{
+
+					return(false);
+
+				}
+
+			}
+
+		}catch(ArrayIndexOutOfBoundsException ex){
+
+		}
+
+		return(false);
+
+	}
+
+	private static void findLetter(String[][] board, String input){
 
 		char first;
 		first = input.charAt(0);
 
-		
-		
-		return(true);
+		for(int a = 0; a < 5; a++){
 
-	}
-	
-	private void findLetter(String[][] board, String input){
-		
-		
-		
+			for(int b = 0; b < 5; b++){
+
+				if(String.valueOf(first).equals(board[a][b])){
+
+					row = a;
+					column = b;
+					return;
+
+				}
+
+			}
+
+		}
+
+		row = -1;
+		column = -1;
+
 	}
 
 }

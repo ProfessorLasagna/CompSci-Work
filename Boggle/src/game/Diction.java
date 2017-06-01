@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class Diction {
 
-	public static void diccheck(String input){
+	public static boolean diccheck(String input){
 
 		try (Stream<String> dictionary = Files.lines(Paths.get("dictionary.txt"))) {
 
@@ -21,10 +21,12 @@ public class Diction {
 
 				if(check.equals(input)){
 
-					System.out.println(input);
+					return(true);
 
 				}else{
 
+					return(false);
+					
 				}
 
 			}
@@ -32,6 +34,8 @@ public class Diction {
 		}catch(IOException ex){
 
 		}
+		
+		return(false);
 
 	}
 
