@@ -18,8 +18,9 @@ public class Play {
 		
 		System.out.println("Please enter the word you would like to check:");
 		String input = in.nextLine();
+		AdjCheck.findLetter(board, input);
 		
-		if(Diction.diccheck(input) && AdjCheck.adj(board, input, 0)){
+		if(AdjCheck.adj(board, input, 1)){
 			
 			System.out.println("Yes!");
 			

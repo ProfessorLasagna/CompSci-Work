@@ -18,15 +18,12 @@ public class Diction {
 			while(meh.hasNext()){
 
 				String check = meh.next();
+				//System.out.println(check);
 
 				if(check.equals(input)){
 
 					return(true);
 
-				}else{
-
-					return(false);
-					
 				}
 
 			}
@@ -34,7 +31,8 @@ public class Diction {
 		}catch(IOException ex){
 
 		}
-		
+	
+		//System.out.println("ahhhhhhhhhhhhhhhhhhhhhh");
 		return(false);
 
 	}
