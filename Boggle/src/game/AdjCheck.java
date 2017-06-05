@@ -8,18 +8,16 @@ public class AdjCheck {
 	private static int column = -1;
 
 	public static boolean adj(String[][] board, String input, int depth){
-		
+
 	//	System.out.format("%d , %d", row, column);
 
-		if(depth > input.length())
-			
+		if(depth + 1 > input.length())
 			return(true);
 
 		try{
 
 			if(board[row+1][column-1].equals(input.substring(depth, depth+1))){
 
-				
 				row = row + 1;
 				column = column - 1;
 
@@ -195,8 +193,8 @@ public class AdjCheck {
 		}catch(ArrayIndexOutOfBoundsException ex){
 
 		}
-		
-		System.out.println("noooooooooooooo");
+
+	//System.out.println("noooooooooooooo");
 
 		return(false);
 

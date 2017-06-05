@@ -14,7 +14,7 @@ public class Scramble {
 
 	}
 
-	public String[][] scrambler(){
+	public static String[][] scrambler(){
 
 		char let = 97;
 
@@ -25,12 +25,14 @@ public class Scramble {
 
 		}
 
-		int a = (int)(26*Math.random());
+		
 
 		for(int b = 0; b < 26; b++){
 
 			while(true){
 
+				int a = (int)(26*Math.random());
+				
 				if(letstore[a] == 0){
 
 					a = (int)(26*Math.random());
@@ -38,7 +40,7 @@ public class Scramble {
 				}else{
 
 					letters.add(String.valueOf(letstore[a]));
-					letstore[a] = 0;
+				//	letstore[a] = 0;
 					break;
 
 				}
