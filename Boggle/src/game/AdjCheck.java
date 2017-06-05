@@ -20,8 +20,8 @@ public class AdjCheck {
 			if(board[row+1][column-1].equals(input.substring(depth, depth+1))){
 
 				
-				row = row+1;
-				column = column -1;
+				row = row + 1;
+				column = column - 1;
 
 				if(adj(board, input, depth+1)){
 
