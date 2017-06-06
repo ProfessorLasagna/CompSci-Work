@@ -9,7 +9,7 @@ public class AdjCheck {
 
 	public static boolean adj(String[][] board, String input, int depth){
 
-	//	System.out.format("%d , %d", row, column);
+		System.out.format("%n%d , %d%n", row, column);
 
 		if(depth + 1 > input.length())
 			return(true);

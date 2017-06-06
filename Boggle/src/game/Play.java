@@ -17,6 +17,8 @@ public class Play {
 								,board[4][2],board[4][3],board[4][4]);
 		
 		do{
+			
+			System.out.println("");
 
 			System.out.println("Please enter the word you would like to check:");
 			input = in.nextLine();
@@ -25,6 +27,7 @@ public class Play {
 			if(Diction.diccheck(input) && AdjCheck.adj(board, input, 1)){
 
 				System.out.println("Yes!");
+				
 
 			}else{
 
