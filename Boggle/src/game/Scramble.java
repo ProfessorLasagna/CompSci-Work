@@ -40,7 +40,7 @@ public class Scramble {
 				}else{
 
 					letters.add(String.valueOf(letstore[a]));
-				//	letstore[a] = 0;
+					letstore[a] = 0;
 					break;
 
 				}

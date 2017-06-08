@@ -6,11 +6,21 @@
 	<item value="537" key="DIALOG_HEIGHT"/>
 	<item value="203" key="DIALOG_X_ORIGIN"/>
 	<item value="26" key="DIALOG_Y_ORIGIN"/>
+	<list key="EGit.KnownHosts">
+		<item value="bitbucket.org"/>
+		<item value="git.eclipse.org"/>
+		<item value="github.com"/>
+	</list>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://github.com/MarkleSparkle/doorsGame.git"/>
+	</list>
 	<list key="CommitDialog.authorValues">
 		<item value="999104001 &lt;999104001@W870-2130.edu.cbe.ab.ca&gt;"/>
+		<item value="999104001 &lt;999104001@W870-2132.edu.cbe.ab.ca&gt;"/>
 	</list>
 	<list key="CommitDialog.committerValues">
 		<item value="999104001 &lt;999104001@W870-2130.edu.cbe.ab.ca&gt;"/>
+		<item value="999104001 &lt;999104001@W870-2132.edu.cbe.ab.ca&gt;"/>
 	</list>
 	<section name="GitImportWizard">
 		<item value="true" key="GitProjectsImportPage.STORE_NESTED_PROJECTS"/>
@@ -25,6 +35,13 @@
 			<item value="600"/>
 			<item value="400"/>
 		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
+		<item value="494" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="399" key="DIALOG_HEIGHT"/>
+		<item value="494" key="DIALOG_X_ORIGIN"/>
+		<item value="374" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="GitCommitMessageComponent">
 	</section>

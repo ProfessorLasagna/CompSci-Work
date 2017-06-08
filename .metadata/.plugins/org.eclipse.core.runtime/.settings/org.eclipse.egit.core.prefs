@@ -1,4 +1,4 @@
-GitRepositoriesView.GitDirectories=H\:\\git\\CompSci-Work\\.git;
-GitRepositoriesView.GitDirectories.relative=.git;
-RepositorySearchDialogSearchPath=H\:\\git
+GitRepositoriesView.GitDirectories=H\:\\git\\doorsGame\\.git;H\:\\git\\CompSci-Work\\.git;
+GitRepositoriesView.GitDirectories.relative=H\:\\git\\doorsGame\\.git;.git;
+RepositorySearchDialogSearchPath=H\:\\git\\Final Project
 eclipse.preferences.version=1
